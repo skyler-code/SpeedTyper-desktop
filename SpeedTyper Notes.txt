@@ -1,0 +1,12 @@
+SpeedTyper is a keyboard typing race program where users can compare their scores with others.
+
+* Typing test
+* Leaderboards
+* Achievements
+* View other profiles
+* Leveling system. More XP the better you do.
+* Rank based on level
+* Guest mode (Can't submit scores)
+
+* Use Azure to host database
+
