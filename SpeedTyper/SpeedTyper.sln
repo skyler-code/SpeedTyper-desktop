@@ -3,7 +3,24 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeedTyper", "SpeedTyper\SpeedTyper.csproj", "{DD68F48F-E2D6-4EC5-8FB0-29A5255D47F2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFPresentationLayer", "SpeedTyper\WPFPresentationLayer.csproj", "{DD68F48F-E2D6-4EC5-8FB0-29A5255D47F2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{937A3DF7-9E16-4132-B2B7-F97310E82F22} = {937A3DF7-9E16-4132-B2B7-F97310E82F22}
+		{782D53F8-7937-4C03-97B7-A711149D3021} = {782D53F8-7937-4C03-97B7-A711149D3021}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeedTyperDataAccess", "SpeedTyperDataAccess\SpeedTyperDataAccess.csproj", "{24B2D72C-C7C9-486F-8DAF-9331144E36E2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{937A3DF7-9E16-4132-B2B7-F97310E82F22} = {937A3DF7-9E16-4132-B2B7-F97310E82F22}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeedTyperDataObjects", "SpeedTyperDataObjects\SpeedTyperDataObjects.csproj", "{937A3DF7-9E16-4132-B2B7-F97310E82F22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeedTyperLogicLayer", "SpeedTyperLogicLayer\SpeedTyperLogicLayer.csproj", "{782D53F8-7937-4C03-97B7-A711149D3021}"
+	ProjectSection(ProjectDependencies) = postProject
+		{24B2D72C-C7C9-486F-8DAF-9331144E36E2} = {24B2D72C-C7C9-486F-8DAF-9331144E36E2}
+		{937A3DF7-9E16-4132-B2B7-F97310E82F22} = {937A3DF7-9E16-4132-B2B7-F97310E82F22}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +32,18 @@ Global
 		{DD68F48F-E2D6-4EC5-8FB0-29A5255D47F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD68F48F-E2D6-4EC5-8FB0-29A5255D47F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD68F48F-E2D6-4EC5-8FB0-29A5255D47F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24B2D72C-C7C9-486F-8DAF-9331144E36E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24B2D72C-C7C9-486F-8DAF-9331144E36E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24B2D72C-C7C9-486F-8DAF-9331144E36E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24B2D72C-C7C9-486F-8DAF-9331144E36E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{937A3DF7-9E16-4132-B2B7-F97310E82F22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{937A3DF7-9E16-4132-B2B7-F97310E82F22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{937A3DF7-9E16-4132-B2B7-F97310E82F22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{937A3DF7-9E16-4132-B2B7-F97310E82F22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{782D53F8-7937-4C03-97B7-A711149D3021}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{782D53F8-7937-4C03-97B7-A711149D3021}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{782D53F8-7937-4C03-97B7-A711149D3021}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{782D53F8-7937-4C03-97B7-A711149D3021}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
