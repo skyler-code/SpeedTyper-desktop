@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpeedTyperDataObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,8 +20,10 @@ namespace SpeedTyper
     /// </summary>
     public partial class MainForm : Window
     {
-        public MainForm()
+        private User _user = null;
+        public MainForm(User user)
         {
+           this._user = user;
             InitializeComponent();
         }
     }

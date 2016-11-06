@@ -21,12 +21,13 @@ GO
 /* ***** Object:  Table [dbo].[Users]     ***** */
 CREATE TABLE [dbo].[Users](
 	[UserID] 		[int] IDENTITY (1,1)	NOT NULL,
-	[Username]		[varchar](20)			NOT NULL,
+	[UserName]		[varchar](20)			NOT NULL,
 	[DisplayName]	[varchar](20)			NOT NULL,
 	[PasswordHash]	[varchar](100)			NOT NULL DEFAULT '9c9064c59f1ffa2e174ee754d2979be80dd30db552ec03e7e327e9b1a4bd594e',
 	[TitleID]		[int]					NOT NULL DEFAULT 1,
 	[Level]			[int]					NOT NULL DEFAULT 1,
-	[XPToLevel]		[int]					NOT NULL DEFAULT 1,
+	[CurrentXP]		[int]					NOT NULL DEFAULT 0,
+	[XPToLevel]		[int]					NOT NULL DEFAULT 1000, -- Change default
 
 	CONSTRAINT [pk_UserID] PRIMARY KEY([UserID] ASC),
 	CONSTRAINT [ak_Username] UNIQUE ([Username] ASC)
@@ -39,8 +40,8 @@ GO
 CREATE TABLE [dbo].[TestResults](
 	[TestResultID]	[int] IDENTITY(1,1) NOT NULL,
 	[UserID]		[int] 				NOT NULL,
-	[WPM]			[decimal]			NOT NULL,
-	[Errors]		[decimal]			NOT NULL,
+	[WPM]			[int]				NOT NULL,
+	[Errors]		[int]				NOT NULL,
 	[Time]			[time]				NOT NULL,
 	[DateTimeTaken]	[datetime]			NOT NULL,
 	

@@ -164,6 +164,16 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SpeedTyperDataObjects\SpeedTyperDataObjects.csproj">
+      <Project>{937a3df7-9e16-4132-b2b7-f97310e82f22}</Project>
+      <Name>SpeedTyperDataObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpeedTyperLogicLayer\SpeedTyperLogicLayer.csproj">
+      <Project>{782d53f8-7937-4c03-97b7-a711149d3021}</Project>
+      <Name>SpeedTyperLogicLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

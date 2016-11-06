@@ -1,4 +1,7 @@
-﻿using System;
+﻿using SpeedTyperDataObjects;
+using SpeedTyperLogicLayer;
+using System;
+using System.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +26,78 @@ namespace SpeedTyper
         public LoginForm()
         {
             InitializeComponent();
+        }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            var username = txtUsername.Text;
+            var password = txtPassword.Password;
+            var usrMgr = new UserManager();
+            User user;
+
+            if (username.Equals(""))
+            {
+                MessageBox.Show("You must enter a username!");
+                txtUsername.Focus();
+                return;
+            }
+            if (password.Equals(""))
+            {
+                MessageBox.Show("You must enter a password!");
+                txtPassword.Focus();
+                return;
+            }
+
+            try
+            {
+                user = usrMgr.AuthenticateUser(username, password);
+                if (chkSaveLogin.IsChecked == true)
+                {
+                    Properties.Settings.Default.Username = username;
+                }
+                else
+                {
+                    Properties.Settings.Default.Username = "";
+                }
+                Properties.Settings.Default.Save();
+                var mainForm = new MainForm(user);
+                mainForm.Show();
+                this.Close();
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!Properties.Settings.Default.Username.Equals(""))
+            {
+                this.txtUsername.Text = Properties.Settings.Default.Username;
+                this.chkSaveLogin.IsChecked = true;
+                this.txtPassword.Focus();
+            }
+            else
+            {
+                this.txtUsername.Focus();
+            }
+        }
+
+        private void btnCreateAccount_Click(object sender, RoutedEventArgs e)
+        {
+            AccountCreateForm accountCreateForm = new AccountCreateForm();
+            accountCreateForm.ShowDialog();
+            if (accountCreateForm.DialogResult == true)
+            {
+                this.Close();
+                accountCreateForm.Close();
+            }
+            else
+            {
+                accountCreateForm.Close();
+            }
         }
     }
 }

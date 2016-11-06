@@ -5,8 +5,42 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpeedTyper"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="SpeedTyper - Login" Height="350" Width="400" Loaded="Window_Loaded">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition Height="15"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Content="Username:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBox x:Name="txtUsername" Grid.Column="1" Margin="3 6 75 6" VerticalContentAlignment="Center"/>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Content="Password:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <PasswordBox x:Name="txtPassword" Grid.Row="2" Grid.Column="1" Margin="3 6 75 6" VerticalContentAlignment="Center"/>
+        </Grid>
+
+
+        <Button x:Name="btnLogin" Grid.Row="4" Content="Login" IsDefault="True" Margin="100 10 100 10" Click="btnLogin_Click"/>
+        <Button x:Name="btnCreateAccount" Grid.Row="5" Content="Create Account" Margin="100 10 100 10" Click="btnCreateAccount_Click"/>
+        <Button x:Name="btnContinueAsGuest" Grid.Row="6" Content="Continue As Guest" Margin="100 10 100 10"/>
+        <CheckBox x:Name="chkSaveLogin" Content="Save Login" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
 </Window>

@@ -43,6 +43,16 @@
     <Compile Include="UserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SpeedTyperDataAccess\SpeedTyperDataAccess.csproj">
+      <Project>{24b2d72c-c7c9-486f-8daf-9331144e36e2}</Project>
+      <Name>SpeedTyperDataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpeedTyperDataObjects\SpeedTyperDataObjects.csproj">
+      <Project>{937A3DF7-9E16-4132-B2B7-F97310E82F22}</Project>
+      <Name>SpeedTyperDataObjects</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
