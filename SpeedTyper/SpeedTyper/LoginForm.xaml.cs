@@ -37,13 +37,13 @@ namespace SpeedTyper
 
             if (username.Equals(""))
             {
-                MessageBox.Show("You must enter a username!");
+                MessageWindow.Show(this, "Error:", "You must enter a username!");
                 txtUsername.Focus();
                 return;
             }
             if (password.Equals(""))
             {
-                MessageBox.Show("You must enter a password!");
+                MessageWindow.Show(this, "Error:", "You must enter a password!");
                 txtPassword.Focus();
                 return;
             }
@@ -66,7 +66,7 @@ namespace SpeedTyper
             }
             catch (Exception ex) 
             {
-                MessageBox.Show(ex.Message);
+                MessageWindow.Show(this, "Error:", ex.Message);
             }
 
         }
@@ -88,6 +88,7 @@ namespace SpeedTyper
         private void btnCreateAccount_Click(object sender, RoutedEventArgs e)
         {
             AccountCreateForm accountCreateForm = new AccountCreateForm();
+            accountCreateForm.Owner = this;
             accountCreateForm.ShowDialog();
             if (accountCreateForm.DialogResult == true)
             {
@@ -99,5 +100,6 @@ namespace SpeedTyper
                 accountCreateForm.Close();
             }
         }
+        
     }
 }

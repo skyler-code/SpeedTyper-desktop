@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SpeedTyperDataObjects;
+using SpeedTyperLogicLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,7 +28,49 @@ namespace SpeedTyper
 
         private void btnCreateAccount_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
+            var username = txtUserName.Text;
+            var displayname = txtDisplayName.Text;
+            var password = txtPassword.Password;
+            var confirmPassword = txtConfirmPassword.Password;
+            var usrMgr = new UserManager();
+
+            if(username.Equals(""))
+            {
+                MessageWindow.Show(this, "Error:", "You must enter a user name!");
+                return;
+            }
+            if(displayname.Equals(""))
+            {
+                MessageWindow.Show(this, "Error:", "You must enter a display name!");
+                return;
+            }
+            if(password.Equals("") || confirmPassword.Equals(""))
+            {
+                MessageWindow.Show(this, "Error:", "You must enter a password!");
+                return;
+            }
+            if (!password.Equals(confirmPassword))
+            {
+                MessageWindow.Show(this, "Error:", "Your passwords must match!");
+                return;
+            }
+            try
+            {
+                if (usrMgr.VerifyIfUserNameExists(username) == true)
+                {
+                    throw new ApplicationException("Username already exists!");
+                }
+                User user = usrMgr.CreateUser(username, displayname, password);
+                MessageWindow.Show(this, "Success:", "Account successfully created!");
+                MainForm mainForm = new MainForm(user);
+                mainForm.Show();
+                this.DialogResult = true;
+            }
+            catch (Exception ex)
+            {
+                MessageWindow.Show(this, "Account creation failed:", ex.Message);
+            }
+            
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)

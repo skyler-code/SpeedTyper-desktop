@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace SpeedTyperLogicLayer
 {
@@ -34,7 +35,7 @@ namespace SpeedTyperLogicLayer
         {
             User user = null;
 
-            if (username.Length < 4 || username.Length > 20)
+            if (username.Length < 4)
             {
                 throw new ApplicationException("Invalid Username");
             }
@@ -56,7 +57,7 @@ namespace SpeedTyperLogicLayer
                 }
                 else
                 {
-                    throw new ApplicationException("Authentication Fialed!");
+                    throw new ApplicationException("Authentication Failed!");
                 }
 
 
@@ -67,6 +68,68 @@ namespace SpeedTyperLogicLayer
                 throw;
             }
             return user;
+        }
+
+
+        public User CreateUser(string username, string displayname, string password)
+        {
+            /**
+             * Creates user and then returns the user if successful
+             */
+            String nameRegexString = @"^\w+$";
+            Regex nameRegex = new Regex(nameRegexString);
+
+            String passwordRegexString = @"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"; // http://stackoverflow.com/a/21456918/7124631
+            Regex passwordRegex = new Regex(passwordRegexString);
+
+            User _user = null;
+            
+            if (nameRegex.Match(username).Success == false)
+            {
+                throw new ApplicationException("Username can only contain letters, numbers, and underscores.");
+            }
+            else if (nameRegex.Match(displayname).Success == false)
+            {
+                throw new ApplicationException("Display Name can only contain letters, numbers, and underscores.");
+            }
+            else if (passwordRegex.Match(password).Success == false)
+            {
+                throw new ApplicationException("Password must have at least 8 characters, 1 letter, and 1 number");
+            }
+            
+
+            try
+            {
+                if (1 == UserAccessor.CreateUser(username, displayname, HashSHA256(password)))
+                {
+                    password = null;
+                    _user = UserAccessor.RetrieveUserByUsername(username);
+                }
+                else
+                {
+                    throw new ApplicationException("Account Creation Failed!");
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return _user;
+        }
+
+        public bool VerifyIfUserNameExists(string username)
+        {
+            bool userNameFound = false;
+            // If we find a user with supplied username, then return true
+            if(UserAccessor.RetrieveUserByUsername(username) != null)
+            {
+                userNameFound = true;
+            }
+
+            return userNameFound;
         }
     }
 

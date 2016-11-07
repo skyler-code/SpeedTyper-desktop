@@ -97,6 +97,51 @@ namespace SpeedTyperDataAccess
 
             return user;
         }
+
+        public static int CreateUser(string username, string displayname, string passwordhash)
+        {
+            var result = 0;
+
+            // get a connection
+            var conn = DBConnection.GetConnection();
+
+            var cmdText = @"sp_create_user";
+
+            // create a command object
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            // add parameters
+            cmd.Parameters.Add("@UserName", SqlDbType.VarChar, 20);
+            cmd.Parameters.Add("@DisplayName", SqlDbType.VarChar, 20);
+            cmd.Parameters.Add("@PasswordHash", SqlDbType.VarChar, 100);
+
+            // set parameter values
+            cmd.Parameters["@UserName"].Value = username;
+            cmd.Parameters["@DisplayName"].Value = displayname;
+            cmd.Parameters["@PasswordHash"].Value = passwordhash;
+
+            // try-catch-finally
+
+            try
+            {
+                // open a connection
+                conn.Open();
+
+                // execute and capture the result
+                result = (int)cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return result;
+        }
     }
  
 }

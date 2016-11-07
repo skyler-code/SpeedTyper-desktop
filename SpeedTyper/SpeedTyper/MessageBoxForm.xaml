@@ -1,0 +1,29 @@
+﻿<Window x:Class="SpeedTyper.MessageBoxForm"
+        x:ClassModifier="internal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SpeedTyper"
+        mc:Ignorable="d" Height="150" Width="300" 
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize" Closing="Window_Closing">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnCancel" Grid.Column="0" Margin="10 10" IsCancel="True" Click="btnCancel_Click" Visibility="Hidden"/>
+            <Button x:Name="btnAccept" Grid.Column="1" Margin="10 10" IsDefault="True" Click="btnAccept_Click" Visibility="Hidden"/>
+        </Grid>
+        <TextBlock x:Name="txtMessage" Grid.Row="0" MaxWidth="260" MaxHeight="200" TextWrapping="Wrap" VerticalAlignment="Center"/>
+        
+    </Grid>
+</Window>

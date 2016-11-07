@@ -11,7 +11,7 @@ AS
 		FROM Users
 		WHERE UserName = @UserName
 		AND PasswordHash = @PasswordHash
-		END
+	END
 GO
 
 print '' print '*** Creating sp_retrieve_user_by_username'
@@ -25,5 +25,22 @@ AS
 		SELECT UserID, UserName, DisplayName, TitleID, Level, CurrentXP, XPToLevel
 		FROM Users
 		WHERE Username = @Username
+	END
+GO
+
+print '' print '*** Creating sp_create_user'
+GO
+CREATE PROCEDURE [dbo].[sp_create_user]
+	(
+	@UserName varchar(20),
+	@DisplayName varchar(20),
+	@PasswordHash varchar(100)
+	)
+AS
+	BEGIN
+		INSERT INTO Users
+			(UserName, DisplayName, PasswordHash)
+		VALUES
+			(@UserName, @DisplayName, @PasswordHash)
 	END
 GO

@@ -23,6 +23,7 @@ namespace SpeedTyper
         private User _user = null;
         public MainForm(User user)
         {
+            
            this._user = user;
             InitializeComponent();
         }
