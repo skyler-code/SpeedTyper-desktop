@@ -23,6 +23,7 @@ namespace SpeedTyper
     /// </summary>
     public partial class LoginForm : Window
     {
+        UserManager usrMgr = new UserManager();
         public LoginForm()
         {
             InitializeComponent();
@@ -32,7 +33,7 @@ namespace SpeedTyper
         {
             var username = txtUsername.Text;
             var password = txtPassword.Password;
-            var usrMgr = new UserManager();
+            
             User user;
 
             if (username.Equals(""))
@@ -100,6 +101,12 @@ namespace SpeedTyper
                 accountCreateForm.Close();
             }
         }
-        
+
+        private void btnContinueAsGuest_Click(object sender, RoutedEventArgs e)
+        {
+            var mainForm = new MainForm(usrMgr.CreateGuestUser());
+            mainForm.Show();
+            this.Close();
+        }
     }
 }

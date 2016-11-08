@@ -40,7 +40,7 @@
 
         <Button x:Name="btnLogin" Grid.Row="4" Content="Login" IsDefault="True" Margin="100 10 100 10" Click="btnLogin_Click"/>
         <Button x:Name="btnCreateAccount" Grid.Row="5" Content="Create Account" Margin="100 10 100 10" Click="btnCreateAccount_Click"/>
-        <Button x:Name="btnContinueAsGuest" Grid.Row="6" Content="Continue As Guest" Margin="100 10 100 10"/>
+        <Button x:Name="btnContinueAsGuest" Grid.Row="6" Content="Continue As Guest" Margin="100 10 100 10" Click="btnContinueAsGuest_Click"/>
         <CheckBox x:Name="chkSaveLogin" Content="Save Login" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
 </Window>

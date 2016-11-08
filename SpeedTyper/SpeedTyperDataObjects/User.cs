@@ -15,5 +15,6 @@ namespace SpeedTyperDataObjects
         public int Level { get; set; }
         public int CurrentXP { get; set; }
         public int XPToLevel { get; set; }
+        public bool IsGuest { get; set; } = false;
     }
 }

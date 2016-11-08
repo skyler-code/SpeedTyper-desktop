@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SpeedTyper"
         mc:Ignorable="d"
         Title="AccountCreateForm" Height="300" Width="300"
-        WindowStartupLocation="CenterOwner">
+        WindowStartupLocation="CenterOwner" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="110"/>
@@ -30,6 +30,6 @@
         <PasswordBox x:Name="txtConfirmPassword" Grid.Column="1" Grid.Row="3" Margin="10 15"/>
         
         <Button x:Name="btnCancel" Grid.Row="5" Content="Cancel" Margin="10 0" Click="btnCancel_Click" VerticalAlignment="Center"/>
-        <Button x:Name="btnCreateAccount" Grid.Row="5" Margin="10 0" Grid.Column="1" Content="Create Account" Click="btnCreateAccount_Click" VerticalAlignment="Center"/>
+        <Button x:Name="btnCreateAccount" Grid.Row="5" Margin="10 0" Grid.Column="1" Content="Create Account" Click="btnCreateAccount_Click" VerticalAlignment="Center" IsDefault="True"/>
     </Grid>
 </Window>

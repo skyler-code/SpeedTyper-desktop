@@ -5,8 +5,77 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpeedTyper"
         mc:Ignorable="d"
-        Title="MainForm" Height="300" Width="300">
+        Title="SpeedTyper" Height="350" Width="450">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="55"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition  MaxHeight="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <Label x:Name="lblUserLevel" Grid.Row="0" Content="Level " HorizontalAlignment="Center" Margin="0 6 0 0"/>
+            <ProgressBar x:Name="prgLevelProgress" Grid.Row="1" Margin="10 7" Minimum="0" Maximum="100"/>
+            <Label x:Name="lblLevelProgress" Grid.Row="1" Content="0/100" HorizontalAlignment="Center" Margin="0 6 0 0" VerticalAlignment="Center"/>
+            <Image x:Name="imgRankIcon" Grid.Row="2" Margin="80 0"/>
+            <Button x:Name="btnTakeSpeedTest" Grid.Row="3" Margin="5 5" Content="Take Speed Test"/>
+            <Button x:Name="btnViewLeaderboards" Grid.Row="4" Margin="5 5" Content="View Leaderboards"/>
+            <Button x:Name="btnViewAchievements" Grid.Row="5" Margin="5 5" Content="View My Achievements"/>
+            <Grid Grid.Row="6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="btnAccountSettings" Grid.Column="0" Margin="5 5" Content="Account Settings"/>
+                <Button x:Name="btnLogout" Grid.Column="1" Margin="5 5" Content="Logout" Click="btnLogout_Click"/>
+            </Grid>
+        </Grid>
+        <TabControl>
+            <TabItem Header="Top 10">
+                <ListView>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Name" Width="75" DisplayMemberBinding="{Binding Name}" />
+                            <GridViewColumn Header="Speed" Width="50" DisplayMemberBinding="{Binding Speed}" />
+                            <GridViewColumn Header="Time" Width="100" DisplayMemberBinding="{Binding Time}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>
+            <TabItem Header="My Last 10 Scores" x:Name="tabLast10Scores">
+                <ListView>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Speed" Width="100" DisplayMemberBinding="{Binding Speed}" />
+                            <GridViewColumn Header="Time" Width="100" DisplayMemberBinding="{Binding Time}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>
+        </TabControl>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25.5"/>
+                <RowDefinition Height="25"/>
+            </Grid.RowDefinitions>
+            
+            <Label x:Name="lblCurrentUserName" Content="Logged in as: " Grid.Row="0"/>
+            <Label x:Name="lblCurrentDisplayName" Content="Display Name: " Grid.Row="1"/>
+        </Grid>
         
+
     </Grid>
+    
 </Window>

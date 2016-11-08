@@ -56,10 +56,6 @@ namespace SpeedTyper
             }
             try
             {
-                if (usrMgr.VerifyIfUserNameExists(username) == true)
-                {
-                    throw new ApplicationException("Username already exists!");
-                }
                 User user = usrMgr.CreateUser(username, displayname, password);
                 MessageWindow.Show(this, "Success:", "Account successfully created!");
                 MainForm mainForm = new MainForm(user);
@@ -76,6 +72,11 @@ namespace SpeedTyper
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = false;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            txtUserName.Focus();
         }
     }
 }

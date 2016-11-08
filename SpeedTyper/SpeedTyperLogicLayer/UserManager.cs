@@ -76,10 +76,12 @@ namespace SpeedTyperLogicLayer
             /**
              * Creates user and then returns the user if successful
              */
+             // username can only contain letters, numbers, and underscores
             String nameRegexString = @"^\w+$";
             Regex nameRegex = new Regex(nameRegexString);
 
-            String passwordRegexString = @"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"; // http://stackoverflow.com/a/21456918/7124631
+            // password  - Minimum 8 characters at least 1 Alphabet and 1 Number with Optional Special Chars
+            String passwordRegexString = @"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!$%@#£€*?&]{8,}$"; // http://stackoverflow.com/a/21456918/7124631
             Regex passwordRegex = new Regex(passwordRegexString);
 
             User _user = null;
@@ -100,14 +102,22 @@ namespace SpeedTyperLogicLayer
 
             try
             {
-                if (1 == UserAccessor.CreateUser(username, displayname, HashSHA256(password)))
+                // can't use a username that already exists.
+                if (VerifyIfUserNameExists(username) == true)
                 {
-                    password = null;
-                    _user = UserAccessor.RetrieveUserByUsername(username);
+                    throw new ApplicationException("Username already exists!");
                 }
                 else
                 {
-                    throw new ApplicationException("Account Creation Failed!");
+                    if (1 == UserAccessor.CreateUser(username, displayname, HashSHA256(password)))
+                    {
+                        password = null;
+                        _user = UserAccessor.RetrieveUserByUsername(username);
+                    }
+                    else
+                    {
+                        throw new ApplicationException("Account Creation Failed!");
+                    }
                 }
 
             }
@@ -118,6 +128,21 @@ namespace SpeedTyperLogicLayer
             }
 
             return _user;
+        }
+
+        public User CreateGuestUser()
+        {
+            return new User()
+            {
+                UserID = 0,
+                UserName = "Guest",
+                DisplayName = "<none>",
+                TitleID = 0,
+                CurrentXP = 0,
+                XPToLevel = 0,
+                Level = 0,
+                IsGuest = true
+            };
         }
 
         public bool VerifyIfUserNameExists(string username)
