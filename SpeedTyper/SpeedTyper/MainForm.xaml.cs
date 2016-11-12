@@ -59,5 +59,13 @@ namespace SpeedTyper
             loginForm.Show();
             this.Close();
         }
+
+        private void btnTakeSpeedTest_Click(object sender, RoutedEventArgs e)
+        {
+            TestForm testForm = new TestForm(_user);
+            testForm.Owner = this;
+            testForm.Show();
+            this.Hide();
+        }
     }
 }

@@ -30,7 +30,7 @@
             <ProgressBar x:Name="prgLevelProgress" Grid.Row="1" Margin="10 7" Minimum="0" Maximum="100"/>
             <Label x:Name="lblLevelProgress" Grid.Row="1" Content="0/100" HorizontalAlignment="Center" Margin="0 6 0 0" VerticalAlignment="Center"/>
             <Image x:Name="imgRankIcon" Grid.Row="2" Margin="80 0"/>
-            <Button x:Name="btnTakeSpeedTest" Grid.Row="3" Margin="5 5" Content="Take Speed Test"/>
+            <Button x:Name="btnTakeSpeedTest" Grid.Row="3" Margin="5 5" Content="Take Speed Test" Click="btnTakeSpeedTest_Click"/>
             <Button x:Name="btnViewLeaderboards" Grid.Row="4" Margin="5 5" Content="View Leaderboards"/>
             <Button x:Name="btnViewAchievements" Grid.Row="5" Margin="5 5" Content="View My Achievements"/>
             <Grid Grid.Row="6">

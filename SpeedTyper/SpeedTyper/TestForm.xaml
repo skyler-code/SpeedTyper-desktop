@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpeedTyper"
         mc:Ignorable="d"
-        Title="TestForm" Height="250" Width="400">
+        Title="TestForm" Height="250" MinHeight="250" Width="500" MinWidth="400" WindowStartupLocation="CenterOwner" Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -14,27 +14,36 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="250"/>
-                <ColumnDefinition/>
+                <ColumnDefinition />
+                <ColumnDefinition Width="145"/>
             </Grid.ColumnDefinitions>
-            <TextBox Grid.Column="0" TextWrapping="Wrap" />
+            <TextBox x:Name="txtTestData" Text=""  Grid.Column="0" TextWrapping="Wrap" Margin="5 5" Focusable="False" IsReadOnly="True"  />
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
-                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="65"/>
                 </Grid.RowDefinitions>
-                <Label x:Name="lblYourSpeed" Grid.Row="0"/>
-                <Label x:Name="lblAccuracy" Grid.Row="1"/>
-                <Label x:Name="lblTimeElapsed" Grid.Row="2"/>
+                <Label x:Name="lblYourSpeed" Content="Your Speed:" Grid.Row="0"/>
+                <Label x:Name="lblAccuracy" Content="Accuracy:" Grid.Row="1"/>
+                <Label x:Name="lblTimeElapsed" Content="Time Elapsed:" Grid.Row="2"/>
             </Grid>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
+                <ColumnDefinition Width="145"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="txtTextEntryBox" Grid.Column="0" Margin="5 5" IsEnabled="False"/>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+            <Button x:Name="btnCancel" Grid.Column="0"  Content="Cancel" Margin="5 5" Click="btnCancel_Click"/>
+            <Button x:Name="btnStart" Grid.Column="1"  Content="Begin Test" Margin="5 5" Click="btnStart_Click"/>
         </Grid>
     </Grid>
 </Window>
