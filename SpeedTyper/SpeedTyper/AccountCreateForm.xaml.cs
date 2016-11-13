@@ -59,8 +59,11 @@ namespace SpeedTyper
                 User user = usrMgr.CreateUser(username, displayname, password);
                 MessageWindow.Show(this, "Success:", "Account successfully created!");
                 MainForm mainForm = new MainForm(user);
+                mainForm.Top = this.Top;
+                mainForm.Left = this.Left;
                 mainForm.Show();
                 this.DialogResult = true;
+                
             }
             catch (Exception ex)
             {
@@ -71,7 +74,7 @@ namespace SpeedTyper
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = false;
+            this.Close();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

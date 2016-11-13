@@ -56,6 +56,8 @@ namespace SpeedTyper
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
             LoginForm loginForm = new LoginForm();
+            loginForm.Top = this.Top;
+            loginForm.Left = this.Left;
             loginForm.Show();
             this.Close();
         }

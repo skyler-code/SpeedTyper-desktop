@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpeedTyper"
         mc:Ignorable="d"
-        Title="TestForm" Height="250" MinHeight="250" Width="500" MinWidth="400" WindowStartupLocation="CenterOwner" Closing="Window_Closing">
+        Title="TestForm" Height="200" MinHeight="200" Width="500" MinWidth="400" WindowStartupLocation="CenterOwner" Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -23,7 +23,6 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
-                    <RowDefinition Height="65"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>

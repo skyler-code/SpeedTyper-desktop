@@ -61,9 +61,7 @@ namespace SpeedTyper
                     Properties.Settings.Default.Username = "";
                 }
                 Properties.Settings.Default.Save();
-                var mainForm = new MainForm(user);
-                mainForm.Show();
-                this.Close();
+                OpenMainForm(user);
             }
             catch (Exception ex) 
             {
@@ -94,17 +92,19 @@ namespace SpeedTyper
             if (accountCreateForm.DialogResult == true)
             {
                 this.Close();
-                accountCreateForm.Close();
-            }
-            else
-            {
-                accountCreateForm.Close();
             }
         }
 
         private void btnContinueAsGuest_Click(object sender, RoutedEventArgs e)
         {
-            var mainForm = new MainForm(usrMgr.CreateGuestUser());
+            OpenMainForm(usrMgr.CreateGuestUser());
+        }
+
+        private void OpenMainForm(User user)
+        {
+            var mainForm = new MainForm(user);
+            mainForm.Top = this.Top;
+            mainForm.Left = this.Left;
             mainForm.Show();
             this.Close();
         }
