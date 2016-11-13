@@ -12,7 +12,7 @@ namespace SpeedTyperDataObjects
         public int UserID { get; set; }
         public int WPM { get; set; }
         public int Errors { get; set; }
-        public TimeSpan Time { get; set; }
-        public DateTime DateTimeTaken { get; set; }
+        public Int64 TimeSpanTicks { get; set; }
+        public DateTime Date { get; set; }
     }
 }

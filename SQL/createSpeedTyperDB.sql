@@ -42,7 +42,7 @@ CREATE TABLE [dbo].[TestResults](
 	[UserID]		[int] 				NOT NULL,
 	[WPM]			[int]				NOT NULL,
 	[Errors]		[int]				NOT NULL,
-	[Time]			[time]				NOT NULL,
+	[TimeSpanTicks]	[bigint]			NOT NULL,
 	[DateTimeTaken]	[datetime]			NOT NULL,
 	
 	CONSTRAINT [pk_TestResultID] PRIMARY KEY([TestResultID] ASC)
@@ -74,8 +74,8 @@ GO
 
 CREATE TABLE [dbo].[TestData](
 	[TestID]		[int]				NOT NULL,
-	[TestData]		[varchar](1000)		NOT NULL,
-	[DataAuthor]	[varchar](50)		NOT NULL,
+	[TestDataText]	[varchar](1000)		NOT NULL,
+	[DataSource]	[varchar](500)		NOT NULL,
 	CONSTRAINT [pk_TestID] PRIMARY KEY([TestID] ASC)
 )
 GO

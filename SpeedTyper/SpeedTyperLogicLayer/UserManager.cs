@@ -20,7 +20,7 @@ namespace SpeedTyperLogicLayer
             {
                 data = sha256hash.ComputeHash(Encoding.UTF8.GetBytes(source));
             }
-            
+
             var s = new StringBuilder();
 
             for (int i = 0; i < data.Length; i++)
@@ -76,7 +76,7 @@ namespace SpeedTyperLogicLayer
             /**
              * Creates user and then returns the user if successful
              */
-             // username can only contain letters, numbers, and underscores
+            // username can only contain letters, numbers, and underscores
             String nameRegexString = @"^\w+$";
             Regex nameRegex = new Regex(nameRegexString);
 
@@ -85,7 +85,7 @@ namespace SpeedTyperLogicLayer
             Regex passwordRegex = new Regex(passwordRegexString);
 
             User _user = null;
-            
+
             if (nameRegex.Match(username).Success == false)
             {
                 throw new ApplicationException("Username can only contain letters, numbers, and underscores.");
@@ -98,7 +98,7 @@ namespace SpeedTyperLogicLayer
             {
                 throw new ApplicationException("Password must have at least 8 characters, 1 letter, and 1 number");
             }
-            
+
 
             try
             {
@@ -123,7 +123,6 @@ namespace SpeedTyperLogicLayer
             }
             catch (Exception)
             {
-
                 throw;
             }
 
@@ -149,14 +148,20 @@ namespace SpeedTyperLogicLayer
         {
             bool userNameFound = false;
             // If we find a user with supplied username, then return true
-            if(UserAccessor.RetrieveUserByUsername(username) != null)
+            try
             {
-                userNameFound = true;
+                if (UserAccessor.RetrieveUserByUsername(username) != null)
+                {
+                    userNameFound = true;
+                }
             }
-
+            catch (Exception)
+            {
+                throw;
+            }
             return userNameFound;
         }
     }
 
-    
+
 }

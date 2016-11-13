@@ -44,3 +44,14 @@ AS
 			(@UserName, @DisplayName, @PasswordHash)
 	END
 GO
+
+print '' print '*** Creating sp_retrieve_random_test'
+GO
+CREATE PROCEDURE [dbo].[sp_retrieve_random_test]
+AS
+	BEGIN
+		SELECT TOP 1 TestID, TestDataText, DataSource
+		FROM TestData
+		ORDER BY NEWID()
+	END
+GO
