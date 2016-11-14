@@ -1,4 +1,5 @@
 ﻿using SpeedTyperDataObjects;
+using SpeedTyperLogicLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,6 +69,24 @@ namespace SpeedTyper
             testForm.Owner = this;
             testForm.Show();
             this.Hide();
+        }
+
+        private void LoadTop10()
+        {
+            TestManager testManager = new TestManager();
+            try
+            {
+                lvwTop10.ItemsSource = testManager.GetTop10TestResults();
+            }
+            catch
+            {
+                MessageWindow.Show(this, "Error:", "Unable to Load Top 10");
+            }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadTop10();
         }
     }
 }

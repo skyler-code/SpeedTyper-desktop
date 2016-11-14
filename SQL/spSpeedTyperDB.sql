@@ -55,3 +55,47 @@ AS
 		ORDER BY NEWID()
 	END
 GO
+
+print '' print '*** Creating sp_insert_test_result'
+GO
+CREATE PROCEDURE [dbo].[sp_insert_test_result]
+	(
+	@UserID int,
+	@WPM decimal,
+	@SecondsElapsed int
+	)
+AS
+	BEGIN
+		INSERT INTO TestResults
+			(UserID, WPM, SecondsElapsed, DateTaken)
+		VALUES
+			(@UserID, @WPM, @SecondsElapsed, GETDATE())
+		RETURN @@IDENTITY
+	END
+GO
+
+print '' print '*** Creating sp_retrieve_test_by_id'
+GO
+CREATE PROCEDURE [dbo].[sp_retrieve_test_by_id]
+	(
+	@TestResultID int
+	)
+AS
+	BEGIN
+		SELECT TestResultID, UserID, WPM, SecondsElapsed, DateTaken
+		FROM TestResults
+		WHERE TestResultID = @TestResultID
+	END
+GO
+
+print '' print '*** Creating sp_retrieve_top_10_test_scores'
+GO
+CREATE PROCEDURE [dbo].[sp_retrieve_top_10_test_scores]
+AS
+	BEGIN
+		SELECT TOP 10 Users.DisplayName, WPM, DateTaken
+		FROM Users, TestResults
+		WHERE Users.UserID = TestResults.UserID
+		ORDER BY WPM DESC
+	END
+GO

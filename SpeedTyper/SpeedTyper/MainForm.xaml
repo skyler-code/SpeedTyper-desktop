@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpeedTyper"
         mc:Ignorable="d"
-        Title="SpeedTyper" Height="350" Width="450" WindowStartupLocation="CenterOwner">
+        Title="SpeedTyper" Height="375" MinHeight="375" Width="475" MinWidth="475" WindowStartupLocation="CenterOwner" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -44,12 +44,12 @@
         </Grid>
         <TabControl>
             <TabItem Header="Top 10">
-                <ListView>
+                <ListView x:Name="lvwTop10" >
                     <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Name" Width="75" DisplayMemberBinding="{Binding Name}" />
-                            <GridViewColumn Header="Speed" Width="50" DisplayMemberBinding="{Binding Speed}" />
-                            <GridViewColumn Header="Time" Width="100" DisplayMemberBinding="{Binding Time}" />
+                        <GridView AllowsColumnReorder="False">
+                            <GridViewColumn Header="Name" Width="75" DisplayMemberBinding="{Binding DisplayName}" />
+                            <GridViewColumn Header="Speed" Width="50" DisplayMemberBinding="{Binding WPM}" />
+                            <GridViewColumn Header="Time" Width="85" DisplayMemberBinding="{Binding Date}" />
                         </GridView>
                     </ListView.View>
                 </ListView>

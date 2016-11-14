@@ -29,11 +29,9 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Label x:Name="lblYourSpeedHeader" Content="Your Speed:" Grid.Row="0" HorizontalAlignment="Right"/>
-                <Label x:Name="lblAccuracyHeader" Content="Accuracy:" Grid.Row="1" HorizontalAlignment="Right"/>
-                <Label x:Name="lblTimeLeftHeader" Content="Time Left:" Grid.Row="2" HorizontalAlignment="Right"/>
+                <Label x:Name="lblTimeLeftHeader" Content="Time Left:" Grid.Row="1" HorizontalAlignment="Right"/>
                 <Label x:Name="lblYourSpeed" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left"/>
-                <Label x:Name="lblAccuracy" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"/>
-                <Label x:Name="lblTimeLeft" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left"/>
+                <Label x:Name="lblTimeLeft" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"/>
             </Grid>
         </Grid>
         <Grid Grid.Row="1">
@@ -41,7 +39,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="145"/>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="txtTextEntryBox" Grid.Column="0" Margin="5 5" IsEnabled="False" TextChanged="txtTextEntryBox_TextChanged"/>
+            <TextBox x:Name="txtTextEntryBox" Grid.Column="0" Margin="5 5" IsEnabled="False" TextChanged="txtTextEntryBox_TextChanged" FontSize="16"/>
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>

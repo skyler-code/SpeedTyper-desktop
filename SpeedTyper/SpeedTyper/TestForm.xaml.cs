@@ -92,6 +92,7 @@ namespace SpeedTyper
             lstTestDataText = Regex.Split(testData.TestDataText, @"(?<=[ ])").ToList();
             correctWords = new List<String>();
 
+            txtTestData.Clear();
             foreach (String s in lstTestDataText)
             {
                 txtTestData.Text += s;
@@ -157,19 +158,7 @@ namespace SpeedTyper
                 } else if(txtTextEntryBox.Text.Length >= lstTestDataText[0].Length) {
                     txtTextEntryBox.Background = Brushes.Red;
                 }
-                updateWPM();
-            }
-        }
-
-        private void updateWPM()
-        {
-            var typedEntries = string.Join("", correctWords.ToArray());
-            var minutesElapsed = (decimal) secondsElapsed * (1m / 60m);
-            lblYourSpeed.Content = minutesElapsed;
-            if (minutesElapsed > 0) // Can't divide by zero so we'll wait a second before we do anything.
-            {
-                var wpm = (typedEntries.Length / 5) / minutesElapsed;
-                lblYourSpeed.Content = Math.Round(wpm, 2) + " WPM";
+                lblYourSpeed.Content = testManager.CalculateWPM(correctWords, (decimal)secondsElapsed) + " WPM";
             }
         }
     }
