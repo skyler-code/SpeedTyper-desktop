@@ -40,10 +40,9 @@ GO
 CREATE TABLE [dbo].[TestResults](
 	[TestResultID]	[int] IDENTITY(1,1) NOT NULL,
 	[UserID]		[int] 				NOT NULL,
-	[WPM]			[int]				NOT NULL,
-	[Errors]		[int]				NOT NULL,
-	[TimeSpanTicks]	[bigint]			NOT NULL,
-	[DateTimeTaken]	[datetime]			NOT NULL,
+	[WPM]			[decimal]			NOT NULL,
+	[SecondsElapsed][int]				NOT NULL,
+	[DateTaken]		[datetime]			NOT NULL,
 	
 	CONSTRAINT [pk_TestResultID] PRIMARY KEY([TestResultID] ASC)
 )
