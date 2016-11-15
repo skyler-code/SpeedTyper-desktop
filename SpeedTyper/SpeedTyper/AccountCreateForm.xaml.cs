@@ -21,6 +21,7 @@ namespace SpeedTyper
     /// </summary>
     public partial class AccountCreateForm : Window
     {
+        public User ReturnUser { get; set; }
         public AccountCreateForm()
         {
             InitializeComponent();
@@ -56,12 +57,8 @@ namespace SpeedTyper
             }
             try
             {
-                User user = usrMgr.CreateUser(username, displayname, password);
+                ReturnUser = usrMgr.CreateUser(username, displayname, password);
                 MessageWindow.Show(this, "Success:", "Account successfully created!");
-                MainForm mainForm = new MainForm(user);
-                mainForm.Top = this.Top;
-                mainForm.Left = this.Left;
-                mainForm.Show();
                 this.DialogResult = true;
                 
             }

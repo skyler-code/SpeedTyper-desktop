@@ -51,7 +51,7 @@ namespace SpeedTyperDataAccess
 
         public static int SaveTestResults(int userID, decimal WPM, int secondsElapsed)
         {
-            var result = 0;
+            int result = 0;
 
             // get a connection
             var conn = DBConnection.GetConnection();

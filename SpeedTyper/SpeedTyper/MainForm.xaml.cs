@@ -21,7 +21,7 @@ namespace SpeedTyper
     /// </summary>
     public partial class MainForm : Window
     {
-        private User _user = null;
+        User _user = null;
         public MainForm(User user)
         {
             this._user = user;
@@ -66,9 +66,10 @@ namespace SpeedTyper
         private void btnTakeSpeedTest_Click(object sender, RoutedEventArgs e)
         {
             TestForm testForm = new TestForm(_user);
-            testForm.Owner = this;
+            testForm.Top = this.Top;
+            testForm.Top = this.Left;
             testForm.Show();
-            this.Hide();
+            this.Close();
         }
 
         private void LoadTop10()

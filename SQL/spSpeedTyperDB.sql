@@ -61,7 +61,7 @@ GO
 CREATE PROCEDURE [dbo].[sp_insert_test_result]
 	(
 	@UserID int,
-	@WPM decimal,
+	@WPM decimal(18,2),
 	@SecondsElapsed int
 	)
 AS
@@ -70,7 +70,7 @@ AS
 			(UserID, WPM, SecondsElapsed, DateTaken)
 		VALUES
 			(@UserID, @WPM, @SecondsElapsed, GETDATE())
-		RETURN @@IDENTITY
+		SELECT CONVERT(int, SCOPE_IDENTITY())
 	END
 GO
 

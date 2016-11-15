@@ -91,7 +91,7 @@ namespace SpeedTyper
             accountCreateForm.ShowDialog();
             if (accountCreateForm.DialogResult == true)
             {
-                this.Close();
+                OpenMainForm(accountCreateForm.ReturnUser);
             }
         }
 

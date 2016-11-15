@@ -37,7 +37,7 @@ namespace SpeedTyper
         private List<String> lstTestDataText;
         private List<String> correctWords;
 
-        User _user;
+        public User _user;
         TestManager testManager;
         public TestForm(User user)
         {
@@ -114,6 +114,39 @@ namespace SpeedTyper
             txtTextEntryBox.IsEnabled = false;
             btnStart.IsEnabled = true;
             timeElapsedTimer.Stop();
+            SubmitTestConfirmation();
+        }
+
+        private void SubmitTestConfirmation()
+        {
+            if (_user.IsGuest)
+            {
+                var result = MessageWindow.Show(this, "Alert:", "You must have an account to submit a test. Would you like to create an account and submit the test?", MessageBoxType.YESNO);
+                if (result == true)
+                {
+                    AccountCreateForm accountCreateForm = new AccountCreateForm();
+                    accountCreateForm.Owner = this;
+                    accountCreateForm.ShowDialog();
+                    if (accountCreateForm.DialogResult == true)
+                    {
+                        _user = accountCreateForm.ReturnUser;
+                        SubmitTest();
+                    }
+                }
+            } else
+            {
+                var result = MessageWindow.Show(this, "Alert:", "Would you like to submit your results?", MessageBoxType.YESNO);
+                if (result == true)
+                {
+                    SubmitTest();
+                }
+            }
+        }
+
+        public void SubmitTest()
+        {
+            var wpm = testManager.CalculateWPM(correctWords, (decimal)secondsElapsed);
+            TestResult testResult = testManager.SaveTestResults(_user.UserID, wpm, secondsElapsed);
         }
 
         private void timeElapsedTimer_Tick(object sender, EventArgs e)
@@ -135,16 +168,19 @@ namespace SpeedTyper
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             // Sets location of owner window so it reopens where this window closes.
-            this.Owner.Left = this.Left;
-            this.Owner.Top = this.Top;
-            this.Owner.Show();
+            MainForm mainForm = new MainForm(_user);
+            mainForm.Top = this.Top;
+            mainForm.Left = this.Left;
+            mainForm.Show();
         }
 
         private void txtTextEntryBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            
             if (!txtTextEntryBox.Text.Equals("") && testInProgress == true)
             {
-                if (txtTextEntryBox.Text.Equals(lstTestDataText[0]))
+                var userEnteredText = Regex.Split(txtTextEntryBox.Text, @"(?<=[ ])").ToList();
+                if (userEnteredText[0].Equals(lstTestDataText[0]))
                 {
                     correctWords.Add(lstTestDataText[0]);
                     txtTestData.Text = txtTestData.Text.Remove(0, lstTestDataText[0].Length);
@@ -157,6 +193,7 @@ namespace SpeedTyper
                     }
                 } else if(txtTextEntryBox.Text.Length >= lstTestDataText[0].Length) {
                     txtTextEntryBox.Background = Brushes.Red;
+
                 }
                 lblYourSpeed.Content = testManager.CalculateWPM(correctWords, (decimal)secondsElapsed) + " WPM";
             }

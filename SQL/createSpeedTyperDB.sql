@@ -40,7 +40,7 @@ GO
 CREATE TABLE [dbo].[TestResults](
 	[TestResultID]	[int] IDENTITY(1,1) NOT NULL,
 	[UserID]		[int] 				NOT NULL,
-	[WPM]			[decimal]			NOT NULL,
+	[WPM]			[decimal](18,2)		NOT NULL,
 	[SecondsElapsed][int]				NOT NULL,
 	[DateTaken]		[datetime]			NOT NULL,
 	
