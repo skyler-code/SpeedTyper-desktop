@@ -49,7 +49,7 @@ namespace SpeedTyperDataAccess
             return testData;
         }
 
-        public static int SaveTestResults(int userID, decimal WPM, int secondsElapsed)
+        public static int SaveTestResults(int userID, int testID, decimal WPM, int secondsElapsed)
         {
             int result = 0;
 
@@ -65,11 +65,13 @@ namespace SpeedTyperDataAccess
 
             // add parameters
             cmd.Parameters.Add("@UserID", SqlDbType.Int);
+            cmd.Parameters.Add("@TestID", SqlDbType.Int);
             cmd.Parameters.Add("@WPM", SqlDbType.Decimal);
             cmd.Parameters.Add("@SecondsElapsed", SqlDbType.Int);
 
             // set parameter values
             cmd.Parameters["@UserID"].Value = userID;
+            cmd.Parameters["@TestID"].Value = testID;
             cmd.Parameters["@WPM"].Value = WPM;
             cmd.Parameters["@SecondsElapsed"].Value = secondsElapsed;
 
@@ -157,6 +159,47 @@ namespace SpeedTyperDataAccess
                         {
                             DisplayName = reader.GetString(0),
                             WPM = reader.GetDecimal(1),
+                            Date = reader.GetDateTime(2).ToString("MMM/dd/yyyy")
+                        });
+                    }
+                }
+                reader.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return testResult;
+        }
+
+        public static List<TestResult> RetrieveUserLast10TestResults(int userID)
+        {
+            var testResult = new List<TestResult>();
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_user_last_10_scores";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@UserID", SqlDbType.Int);
+            cmd.Parameters["@UserID"].Value = userID;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        testResult.Add(new TestResult()
+                        {
+                            WPM = reader.GetDecimal(0),
+                            SecondsElapsed = reader.GetInt32(1),
                             Date = reader.GetDateTime(2).ToString("MMM/dd/yyyy")
                         });
                     }

@@ -46,13 +46,13 @@ namespace SpeedTyperLogicLayer
             return testData;
         }
 
-        public TestResult SaveTestResults(int userID, decimal WPM, int secondsElapsed)
+        public TestResult SaveTestResults(int userID, int testID, decimal WPM, int secondsElapsed)
         {
             TestResult testResult = null;
             try
             {
-                var testID = TestAccessor.SaveTestResults(userID, WPM, secondsElapsed);
-                testResult = TestAccessor.RetrieveTestResultsByID(testID);
+                var testResultID = TestAccessor.SaveTestResults(userID, testID, WPM, secondsElapsed);
+                testResult = TestAccessor.RetrieveTestResultsByID(testResultID);
             }
             catch (Exception)
             {
@@ -87,6 +87,22 @@ namespace SpeedTyperLogicLayer
             }
 
             return top10Tests;
+        }
+
+        public List<TestResult> GetUserLast10TestResults(int userID)
+        {
+            List<TestResult> last10Tests = null;
+
+            try
+            {
+                last10Tests = TestAccessor.RetrieveUserLast10TestResults(userID);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return last10Tests;
         }
     }
 }

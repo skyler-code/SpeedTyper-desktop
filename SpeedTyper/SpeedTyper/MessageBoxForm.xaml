@@ -23,7 +23,7 @@
             <Button x:Name="btnCancel" Grid.Column="0" Margin="10 10" IsCancel="True" Click="btnCancel_Click" Visibility="Hidden"/>
             <Button x:Name="btnAccept" Grid.Column="1" Margin="10 10" IsDefault="True" Click="btnAccept_Click" Visibility="Hidden"/>
         </Grid>
-        <TextBlock x:Name="txtMessage" Grid.Row="0" MaxWidth="260" MaxHeight="200" TextWrapping="Wrap" VerticalAlignment="Center"/>
+        <TextBlock x:Name="txtMessage" Grid.Row="0" MaxWidth="260" MaxHeight="200" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         
     </Grid>
 </Window>

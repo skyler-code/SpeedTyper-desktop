@@ -1,4 +1,5 @@
-print '' print '*** Inserting User Test Records'
+print '' print '*** Inserting User'
+GO
 INSERT INTO [dbo].[Users]
 		([UserName], [DisplayName])
 	VALUES
@@ -6,26 +7,28 @@ INSERT INTO [dbo].[Users]
 GO
 
 print '' print '*** Insert FakeTestResults'
+GO
 INSERT INTO [dbo].[TestResults]
-		([UserID], [WPM], [SecondsElapsed], [DateTaken])
+		([UserID], [TestID], [WPM], [SecondsElapsed], [DateTaken])
 	VALUES
-		(1, 200, 40, GETDATE()),
-		(1, 32, 40, GETDATE()),
-		(1, 54, 40, GETDATE()),
-		(1, 124, 40, GETDATE()),
-		(1, 542, 40, GETDATE()),
-		(1, 23, 40, GETDATE()),
-		(1, 21, 40, GETDATE()),
-		(1, 1, 40, GETDATE()),
-		(1, 54, 40, GETDATE()),
-		(1, 64, 40, GETDATE()),
-		(1, 344, 40, GETDATE()),
-		(1, 23, 40, GETDATE()),
-		(1, 43, 40, GETDATE()),
-		(1, 523, 40, GETDATE())
+		(1, 1, 200, 40, GETDATE()),
+		(1, 1, 32, 40, GETDATE()),
+		(1, 1, 54, 40, GETDATE()),
+		(1, 1, 124, 40, GETDATE()),
+		(1, 1, 542, 40, GETDATE()),
+		(1, 1, 23, 40, GETDATE()),
+		(1, 1, 21, 40, GETDATE()),
+		(1, 1, 1, 40, GETDATE()),
+		(1, 1, 54, 40, GETDATE()),
+		(1, 1, 64, 40, GETDATE()),
+		(1, 1, 344, 40, GETDATE()),
+		(1, 1, 23, 40, GETDATE()),
+		(1, 1, 43, 40, GETDATE()),
+		(1, 1, 523, 40, GETDATE())
 GO
 
 print '' print '*** Inserting TestData Records'
+GO
 INSERT INTO [dbo].[TestData]
 		([TestID], [TestDataText], [DataSource])
 	VALUES

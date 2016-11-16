@@ -9,7 +9,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="225"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -55,11 +55,12 @@
                 </ListView>
             </TabItem>
             <TabItem Header="My Last 10 Scores" x:Name="tabLast10Scores">
-                <ListView>
+                <ListView x:Name="lvwLast10Scores">
                     <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Speed" Width="100" DisplayMemberBinding="{Binding Speed}" />
-                            <GridViewColumn Header="Time" Width="100" DisplayMemberBinding="{Binding Time}" />
+                        <GridView AllowsColumnReorder="False">
+                            <GridViewColumn Header="WPM" Width="70" DisplayMemberBinding="{Binding WPM}" />
+                            <GridViewColumn Header="Time(sec)" Width="70" DisplayMemberBinding="{Binding SecondsElapsed}"/>
+                            <GridViewColumn Header="Date" Width="85" DisplayMemberBinding="{Binding Date}" />
                         </GridView>
                     </ListView.View>
                 </ListView>

@@ -22,6 +22,7 @@ namespace SpeedTyper
     public partial class MainForm : Window
     {
         User _user = null;
+        TestManager testManager = new TestManager();
         public MainForm(User user)
         {
             this._user = user;
@@ -67,14 +68,13 @@ namespace SpeedTyper
         {
             TestForm testForm = new TestForm(_user);
             testForm.Top = this.Top;
-            testForm.Top = this.Left;
+            testForm.Left = this.Left;
             testForm.Show();
             this.Close();
         }
 
         private void LoadTop10()
         {
-            TestManager testManager = new TestManager();
             try
             {
                 lvwTop10.ItemsSource = testManager.GetTop10TestResults();
@@ -85,9 +85,25 @@ namespace SpeedTyper
             }
         }
 
+        private void LoadLast10TestResults()
+        {
+            try
+            {
+                lvwLast10Scores.ItemsSource = testManager.GetUserLast10TestResults(_user.UserID);
+            }
+            catch
+            {
+                MessageWindow.Show(this, "Error:", "Unable to Load Last 10");
+            }
+        }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             LoadTop10();
+            if(_user.IsGuest == false)
+            {
+                LoadLast10TestResults();
+            }
         }
     }
 }

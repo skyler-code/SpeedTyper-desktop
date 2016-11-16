@@ -61,15 +61,16 @@ GO
 CREATE PROCEDURE [dbo].[sp_insert_test_result]
 	(
 	@UserID int,
+	@TestID int,
 	@WPM decimal(18,2),
 	@SecondsElapsed int
 	)
 AS
 	BEGIN
 		INSERT INTO TestResults
-			(UserID, WPM, SecondsElapsed, DateTaken)
+			(UserID, TestID, WPM, SecondsElapsed, DateTaken)
 		VALUES
-			(@UserID, @WPM, @SecondsElapsed, GETDATE())
+			(@UserID, @TestID, @WPM, @SecondsElapsed, GETDATE())
 		SELECT CONVERT(int, SCOPE_IDENTITY())
 	END
 GO
@@ -97,5 +98,20 @@ AS
 		FROM Users, TestResults
 		WHERE Users.UserID = TestResults.UserID
 		ORDER BY WPM DESC
+	END
+GO
+
+print '' print '*** Creating sp_retrieve_user_last_10_scores'
+GO
+CREATE PROCEDURE [dbo].[sp_retrieve_user_last_10_scores]
+	(
+	@UserID int
+	)
+AS
+	BEGIN
+		SELECT TOP 10 WPM, SecondsElapsed, DateTaken
+		FROM TestResults
+		WHERE UserID = @UserID
+		ORDER BY DateTaken DESC
 	END
 GO
