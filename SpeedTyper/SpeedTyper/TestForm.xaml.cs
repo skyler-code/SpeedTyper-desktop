@@ -33,11 +33,12 @@ namespace SpeedTyper
         private int secondsLeft; // int of seconds the user has left to complete test
         private int secondsElapsed; // int of seconds the user has been taking test
         private bool testInProgress = false;
-        private TestData testData;
+
         private List<String> lstTestDataText;
         private List<String> correctWords;
 
-        public User _user;
+        private User _user;
+        private TestData testData;
         TestManager testManager;
         public TestForm(User user)
         {
@@ -121,8 +122,8 @@ namespace SpeedTyper
         {
             if (_user.IsGuest)
             {
-                var result = MessageWindow.Show(this, "Alert:", "You must have an account to submit a test. Would you like to create an account and submit the test?", MessageBoxType.YESNO);
-                if (result == true)
+                var acctResult = MessageWindow.Show(this, "Alert:", "You must have an account to submit a test. Would you like to create an account?", MessageBoxType.YESNO);
+                if (acctResult == true)
                 {
                     AccountCreateForm accountCreateForm = new AccountCreateForm();
                     accountCreateForm.Owner = this;
@@ -130,23 +131,24 @@ namespace SpeedTyper
                     if (accountCreateForm.DialogResult == true)
                     {
                         _user = accountCreateForm.ReturnUser;
-                        SubmitTest();
                     }
                 }
-            } else
-            {
-                var result = MessageWindow.Show(this, "Alert:", "Would you like to submit your results?", MessageBoxType.YESNO);
-                if (result == true)
+                else
                 {
-                    SubmitTest();
+                    return;
                 }
+            }
+            var result = MessageWindow.Show(this, "Alert:", "You typed " + GetWPM() + " WPM in " + secondsElapsed + " seconds.\n" +
+                                                            "Would you like to submit your results?", MessageBoxType.YESNO);
+            if (result == true)
+            {
+                SubmitTest();
             }
         }
 
         public void SubmitTest()
         {
-            var wpm = testManager.CalculateWPM(correctWords, (decimal)secondsElapsed);
-            TestResult testResult = testManager.SaveTestResults(_user.UserID, wpm, secondsElapsed);
+            TestResult testResult = testManager.SaveTestResults(_user.UserID, testData.TestID, GetWPM(), secondsElapsed);
         }
 
         private void timeElapsedTimer_Tick(object sender, EventArgs e)
@@ -176,7 +178,7 @@ namespace SpeedTyper
 
         private void txtTextEntryBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
+
             if (!txtTextEntryBox.Text.Equals("") && testInProgress == true)
             {
                 var userEnteredText = Regex.Split(txtTextEntryBox.Text, @"(?<=[ ])").ToList();
@@ -189,14 +191,22 @@ namespace SpeedTyper
                     txtTextEntryBox.Background = Brushes.White;
                     if (txtTestData.Text.Equals(""))
                     {
+                        lblYourSpeed.Content = GetWPM() + " WPM";
                         EndTest();
                     }
-                } else if(txtTextEntryBox.Text.Length >= lstTestDataText[0].Length) {
+                }
+                else if (txtTextEntryBox.Text.Length >= lstTestDataText[0].Length)
+                {
                     txtTextEntryBox.Background = Brushes.Red;
 
                 }
-                lblYourSpeed.Content = testManager.CalculateWPM(correctWords, (decimal)secondsElapsed) + " WPM";
+                lblYourSpeed.Content = GetWPM() + " WPM";
             }
+        }
+
+        private decimal GetWPM()
+        {
+            return testManager.CalculateWPM(correctWords, (decimal)secondsElapsed);
         }
     }
 }
