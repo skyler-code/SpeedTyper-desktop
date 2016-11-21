@@ -6,6 +6,13 @@
         xmlns:local="clr-namespace:SpeedTyper"
         mc:Ignorable="d"
         Title="SpeedTyper" Height="375" MinHeight="375" Width="475" MinWidth="475" WindowStartupLocation="CenterOwner" Loaded="Window_Loaded">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="images.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -19,7 +26,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition  MaxHeight="50"/>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="32"/>
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -29,7 +36,7 @@
             <Label x:Name="lblUserLevel" Grid.Row="0" Content="Level " HorizontalAlignment="Center" Margin="0 6 0 0"/>
             <ProgressBar x:Name="prgLevelProgress" Grid.Row="1" Margin="10 7" Minimum="0" Maximum="100"/>
             <Label x:Name="lblLevelProgress" Grid.Row="1" Content="0/100" HorizontalAlignment="Center" Margin="0 6 0 0" VerticalAlignment="Center"/>
-            <Image x:Name="imgRankIcon" Grid.Row="2" Margin="80 0"/>
+            <Image x:Name="imgRankIcon" Grid.Row="2" Width="32" Height="32" Margin="80 0"/>
             <Button x:Name="btnTakeSpeedTest" Grid.Row="3" Margin="5 5" Content="Take Speed Test" Click="btnTakeSpeedTest_Click"/>
             <Button x:Name="btnViewLeaderboards" Grid.Row="4" Margin="5 5" Content="View Leaderboards"/>
             <Button x:Name="btnViewAchievements" Grid.Row="5" Margin="5 5" Content="View My Achievements"/>
@@ -38,7 +45,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="btnAccountSettings" Grid.Column="0" Margin="5 5" Content="Account Settings"/>
+                <Button x:Name="btnAccountSettings" Grid.Column="0" Margin="5 5" Content="Account Settings" Click="btnAccountSettings_Click"/>
                 <Button x:Name="btnLogout" Grid.Column="1" Margin="5 5" Content="Logout" Click="btnLogout_Click"/>
             </Grid>
         </Grid>

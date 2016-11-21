@@ -12,6 +12,13 @@ namespace SpeedTyperLogicLayer
 {
     public class UserManager
     {
+        // username can only contain letters, numbers, and underscores
+        private string nameRegexString = @"^\w+$";
+        // password  - Minimum 8 characters at least 1 Alphabet and 1 Number with Optional Special Chars
+        private string passwordRegexString = @"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!$%@#£€*?&]{8,}$"; // http://stackoverflow.com/a/21456918/7124631
+
+
+
         internal string HashSHA256(string source)
         {
             var result = "";
@@ -76,14 +83,8 @@ namespace SpeedTyperLogicLayer
             /**
              * Creates user and then returns the user if successful
              */
-            // username can only contain letters, numbers, and underscores
-            String nameRegexString = @"^\w+$";
             Regex nameRegex = new Regex(nameRegexString);
-
-            // password  - Minimum 8 characters at least 1 Alphabet and 1 Number with Optional Special Chars
-            String passwordRegexString = @"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!$%@#£€*?&]{8,}$"; // http://stackoverflow.com/a/21456918/7124631
             Regex passwordRegex = new Regex(passwordRegexString);
-
             User _user = null;
 
             if (nameRegex.Match(username).Success == false)
@@ -129,6 +130,48 @@ namespace SpeedTyperLogicLayer
             return _user;
         }
 
+
+        public User UpdateUser(int userID, string oldDisplayName, string newDisplayName, string oldPassword, string newPassword)
+        {
+            /**
+             * Creates user and then returns the user if successful
+             */
+            Regex nameRegex = new Regex(nameRegexString);
+            Regex passwordRegex = new Regex(passwordRegexString);
+            User _user = null;
+
+            if (nameRegex.Match(newDisplayName).Success == false)
+            {
+                throw new ApplicationException("Display Name can only contain letters, numbers, and underscores.");
+            }
+            else if (passwordRegex.Match(newPassword).Success == false)
+            {
+                throw new ApplicationException("New password must have at least 8 characters, 1 letter, and 1 number");
+            }
+
+
+            try
+            {
+
+                if (1 == UserAccessor.UpdateUser(userID, oldDisplayName, newDisplayName, HashSHA256(oldPassword), HashSHA256(newPassword)))
+                {
+                    oldPassword = null;
+                    newPassword = null;
+                    _user = UserAccessor.RetrieveUserByID(userID);
+                }
+                else
+                {
+                    throw new ApplicationException("Account Update Failed!");
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return _user;
+        }
+
         public User CreateGuestUser()
         {
             return new User()
@@ -136,10 +179,9 @@ namespace SpeedTyperLogicLayer
                 UserID = 0,
                 UserName = "Guest",
                 DisplayName = "<none>",
-                TitleID = 0,
+                RankID = 0,
                 CurrentXP = 0,
                 XPToLevel = 0,
-                Level = 0,
                 IsGuest = true
             };
         }
@@ -161,7 +203,20 @@ namespace SpeedTyperLogicLayer
             }
             return userNameFound;
         }
+
+        public string RetrieveUserRankName(int rankID)
+        {
+            string rankName;
+
+            try
+            {
+                rankName = UserAccessor.RetrieveUserRankName(rankID);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return rankName;
+        }
     }
-
-
 }

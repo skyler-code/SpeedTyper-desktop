@@ -5,8 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpeedTyper"
         mc:Ignorable="d"
-        Title="AccountManagementForm" Height="300" Width="300">
+        WindowStartupLocation="CenterOwner"
+        Height="300" Width="400" Loaded="Window_Loaded">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="110"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Grid.Column="0" Grid.Row="0" Content="Display Name:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+        <Label Grid.Column="0" Grid.Row="1" Content="Old Password:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+        <Label Grid.Column="0" Grid.Row="2" Content="New Password:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+        <Label Grid.Column="0" Grid.Row="3" Content="Confirm Password:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+
+        <TextBox x:Name="txtDisplayName" Grid.Column="1" Grid.Row="0" Margin="10 15" MaxLength="20"/>
+        <PasswordBox x:Name="txtOldPassword" Grid.Column="1" Grid.Row="1" Margin="10 15"/>
+        <PasswordBox x:Name="txtNewPassword" Grid.Column="1" Grid.Row="2" Margin="10 15"/>
+        <PasswordBox x:Name="txtConfirmPassword" Grid.Column="1" Grid.Row="3" Margin="10 15"/>
+
+        <Button x:Name="btnCancel" Grid.Row="5" Content="Cancel" Margin="10 0" Click="btnCancel_Click" VerticalAlignment="Center"/>
+        <Button x:Name="btnUpdateAccount" Grid.Row="5" Margin="10 0" Grid.Column="1" Content="Update Account" Click="btnUpdateAccount_Click" VerticalAlignment="Center" IsDefault="True"/>
     </Grid>
 </Window>

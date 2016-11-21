@@ -22,9 +22,23 @@ CREATE PROCEDURE [dbo].[sp_retrieve_user_by_username]
 	)
 AS
 	BEGIN
-		SELECT UserID, UserName, DisplayName, TitleID, Level, CurrentXP, XPToLevel
+		SELECT UserID, UserName, DisplayName, RankID, Level, CurrentXP, XPToLevel
 		FROM Users
 		WHERE Username = @Username
+	END
+GO
+
+print '' print '*** Creating sp_retrieve_user_by_id'
+GO
+CREATE PROCEDURE [dbo].[sp_retrieve_user_by_id]
+	(
+	@UserID 	int
+	)
+AS
+	BEGIN
+		SELECT UserID, UserName, DisplayName, RankID, Level, CurrentXP, XPToLevel
+		FROM Users
+		WHERE UserID = @UserID
 	END
 GO
 
@@ -44,6 +58,44 @@ AS
 			(@UserName, @DisplayName, @PasswordHash)
 	END
 GO
+
+
+print '' print '*** Creating sp_update_user'
+GO
+CREATE PROCEDURE [dbo].[sp_update_user]
+	(
+	@UserID				int,
+	@OldPasswordHash	varchar(100),
+	@OldDisplayName		varchar(20),
+	@NewDisplayName		varchar(20),
+	@NewPasswordHash	varchar(100)
+	)
+AS
+	BEGIN
+		UPDATE Users
+			SET PasswordHash = @NewPasswordHash,
+				DisplayName = @NewDisplayName
+			WHERE UserID = @UserID
+			AND PasswordHash = @OldPasswordHash
+			AND DisplayName = @OldDisplayName
+		RETURN @@ROWCOUNT
+	END
+GO
+
+print '' print '*** Creating sp_retrieve_rank_name'
+GO
+CREATE PROCEDURE [dbo].[sp_retrieve_rank_name]
+	(
+	@RankID	int
+	)
+AS
+	BEGIN
+		SELECT RankName
+		FROM RankInfo
+		WHERE RankID = @RankID
+	END
+GO
+
 
 print '' print '*** Creating sp_retrieve_random_test'
 GO

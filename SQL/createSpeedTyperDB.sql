@@ -24,10 +24,10 @@ CREATE TABLE [dbo].[Users](
 	[UserName]		[varchar](20)			NOT NULL,
 	[DisplayName]	[varchar](20)			NOT NULL,
 	[PasswordHash]	[varchar](100)			NOT NULL DEFAULT '9c9064c59f1ffa2e174ee754d2979be80dd30db552ec03e7e327e9b1a4bd594e',
-	[TitleID]		[int]					NOT NULL DEFAULT 1,
-	[Level]			[int]					NOT NULL DEFAULT 1,
+	[RankID]		[int]					NOT NULL DEFAULT 0,
+	[Level]			[int]					NOT NULL DEFAULT 0,
 	[CurrentXP]		[int]					NOT NULL DEFAULT 0,
-	[XPToLevel]		[int]					NOT NULL DEFAULT 1000, -- Change default
+	[XPToLevel]		[int]					NOT NULL DEFAULT 150, -- 150XP required for level 1
 
 	CONSTRAINT [pk_UserID] PRIMARY KEY([UserID] ASC),
 	CONSTRAINT [ak_Username] UNIQUE ([Username] ASC)
@@ -59,16 +59,6 @@ CREATE TABLE [dbo].[UserAchievements](
 )
 GO
 
-print '' print '*** Creating UserTitles Table'
-GO
-
-CREATE TABLE [dbo].[UserTitles](
-	[TitleID]	[int]			NOT NULL,
-	[TitleName]	[varchar](100)	NOT NULL,
-	CONSTRAINT [pk_TitleID] PRIMARY KEY([TitleID] ASC)
-)
-GO
-
 print '' print '*** Creating TestData Table'
 GO
 
@@ -82,12 +72,19 @@ GO
 
 print '' print '*** Creating LevelInfo Table'
 GO
-
 CREATE TABLE [dbo].[LevelInfo](
-	[Level]			[int]		NOT NULL,
-	[TitleID]		[int]		NOT NULL,
-	[RequiredXP]	[int]		NOT NULL,
+	[Level]			[int]			NOT NULL,
+	[RequiredXP]	[int]			NOT NULL,
 	CONSTRAINT [pk_Level] PRIMARY KEY([Level] ASC)
+)
+GO
+
+print '' print '*** Creating RankInfo Table'
+GO
+CREATE TABLE [dbo].[RankInfo](
+	[RankID]		[int]			NOT NULL,
+	[RankName]		[varchar](30)	NOT NULL,
+	CONSTRAINT [pk_RankID] PRIMARY KEY([RankID] ASC)
 )
 GO
 

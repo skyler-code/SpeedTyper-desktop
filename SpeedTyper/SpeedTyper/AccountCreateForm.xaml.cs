@@ -21,7 +21,7 @@ namespace SpeedTyper
     /// </summary>
     public partial class AccountCreateForm : Window
     {
-        public User ReturnUser { get; set; }
+        public User ReturnUser { get; private set; }
         public AccountCreateForm()
         {
             InitializeComponent();

@@ -52,6 +52,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -91,6 +92,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Resource Include="images.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
     <Page Include="LeaderboardForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -180,6 +185,51 @@
       <Project>{782d53f8-7937-4c03-97b7-a711149d3021}</Project>
       <Name>SpeedTyperLogicLayer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Rank01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Rank02.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Rank03.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Rank04.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Rank05.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Rank06.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Rank07.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Rank08.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Rank09.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Rank10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Rank11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Rank12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Rank13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Rank14.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Rank15.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

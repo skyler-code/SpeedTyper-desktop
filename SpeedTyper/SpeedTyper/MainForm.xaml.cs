@@ -3,6 +3,7 @@ using SpeedTyperLogicLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,22 +24,18 @@ namespace SpeedTyper
     {
         User _user = null;
         TestManager testManager = new TestManager();
+        UserManager userManager = new UserManager();
         public MainForm(User user)
         {
             this._user = user;
             InitializeComponent();
-            setLabels();
-            if (_user.IsGuest)
-            {
-                DisableFunctionsForGuest();
-            }
         }
 
         private void setLabels()
         {
-            lblCurrentUserName.Content += _user.UserName;
-            lblCurrentDisplayName.Content += _user.DisplayName;
-            lblUserLevel.Content += _user.Level.ToString();
+            lblCurrentUserName.Content = "Current User: " + _user.UserName;
+            lblCurrentDisplayName.Content = "Display Name: " + _user.DisplayName;
+            lblUserLevel.Content = "Level: " + _user.Level.ToString();
             double levelProgress = 0;
             if (_user.XPToLevel != 0) // Can't divide by 0!
             {
@@ -100,10 +97,50 @@ namespace SpeedTyper
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             LoadTop10();
-            if(_user.IsGuest == false)
+            setLabels();
+            if (_user.IsGuest == false)
             {
                 LoadLast10TestResults();
+                if (_user.RankID > 0)
+                {
+                    setRankImage();
+                }
             }
+            else
+            {
+                DisableFunctionsForGuest();
+            }
+        }
+
+        private void btnAccountSettings_Click(object sender, RoutedEventArgs e)
+        {
+            AccountManagementForm accountManagementForm = new AccountManagementForm(_user);
+            accountManagementForm.Owner = this;
+            accountManagementForm.ShowDialog();
+            if (accountManagementForm.DialogResult == true)
+            {
+                _user = accountManagementForm.ReturnUser;
+                setLabels();
+            }
+        }
+
+        private void setRankImage()
+        {
+            var userRank = _user.RankID;
+            string fileName;
+            if (userRank < 10)
+            {
+                fileName = "Rank0" + userRank;
+            }
+            else
+            {
+                fileName = "Rank" + userRank;
+            }
+            imgRankIcon.BeginInit();
+            imgRankIcon.Source = (ImageSource)FindResource(fileName);
+            imgRankIcon.Stretch = Stretch.Fill;
+            imgRankIcon.ToolTip = userManager.RetrieveUserRankName(userRank);
+            imgRankIcon.EndInit();
         }
     }
 }
