@@ -17,7 +17,7 @@ namespace SpeedTyperDataAccess
 
             // get a connection
             var conn = DBConnection.GetConnection();
-            
+
             var cmdText = @"sp_authenticate_user";
 
             // create a command object
@@ -239,16 +239,14 @@ namespace SpeedTyperDataAccess
             return result;
         }
 
-        public static string RetrieveUserRankName(int rankID)
+        public static List<Rank> RetrieveUserRankNames()
         {
-            String rankName = null;
+            List<Rank> ranks = new List<Rank>();
 
             var conn = DBConnection.GetConnection();
-            var cmdText = @"sp_retrieve_rank_name";
+            var cmdText = @"sp_retrieve_rank_names";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@RankID", SqlDbType.Int);
-            cmd.Parameters["@RankID"].Value = rankID;
 
             try
             {
@@ -257,8 +255,14 @@ namespace SpeedTyperDataAccess
 
                 if (reader.HasRows)
                 {
-                    reader.Read();
-                    rankName = reader.GetString(0);
+                    while (reader.Read())
+                    {
+                        ranks.Add(new Rank()
+                        {
+                            RankID = reader.GetInt32(0),
+                            RankName = reader.GetString(1)
+                        });
+                    }
                 }
                 reader.Close();
             }
@@ -271,9 +275,9 @@ namespace SpeedTyperDataAccess
                 conn.Close();
             }
 
-            return rankName;
+            return ranks;
         }
 
     }
- 
+
 }

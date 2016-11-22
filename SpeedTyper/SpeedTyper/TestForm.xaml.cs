@@ -39,11 +39,13 @@ namespace SpeedTyper
 
         private User _user;
         private TestData testData;
-        TestManager testManager;
-        public TestForm(User user)
+        TestManager _testManager;
+        LevelManager _levelManager;
+        public TestForm(User user, TestManager testManager)
         {
             _user = user;
-            testManager = new TestManager();
+            _testManager = testManager;
+            _levelManager = new LevelManager();
             InitializeComponent();
         }
 
@@ -82,7 +84,7 @@ namespace SpeedTyper
             txtTextEntryBox.Focus();
             try
             {
-                testData = testManager.RetrieveRandomTest();
+                testData = _testManager.RetrieveRandomTest();
             }
             catch (Exception ex)
             {
@@ -105,7 +107,7 @@ namespace SpeedTyper
             timeElapsedTimer.Start();
             secondsLeft = EndTimerCountdown;
             secondsElapsed = 0;
-            lblTimeLeft.Content = testManager.SecondsToTimeSpanFormatter(secondsLeft);
+            lblTimeLeft.Content = _testManager.SecondsToTimeSpanFormatter(secondsLeft);
         }
 
         private void EndTest()
@@ -148,14 +150,26 @@ namespace SpeedTyper
 
         public void SubmitTest()
         {
-            TestResult testResult = testManager.SaveTestResults(_user.UserID, testData.TestID, GetWPM(), secondsElapsed);
+            TestResult testResult = _testManager.SaveTestResults(_user.UserID, testData.TestID, GetWPM(), secondsElapsed);
+            var wpmXPModifier = _levelManager.GetWPMXPModifier(testResult.WPM);
+            var timeXPModifier = _levelManager.GetTimeMXPModifier((decimal)testResult.SecondsElapsed);
+
+            var earnedXP = _levelManager.CalculateXP(testResult.WPM, wpmXPModifier, timeXPModifier);
+
+            var outputString = "You have earned " + earnedXP + " XP!\n" +
+                                "WPM = " + testResult.WPM + "\n" +
+                                "WPM Modifier = " + wpmXPModifier + "\n" +
+                                "Time Modifier = " + timeXPModifier + "\n" +
+                                testResult.WPM + " x " + wpmXPModifier + " x " + timeXPModifier + " = " + earnedXP;
+
+            MessageWindow.Show(this, "Congratulations!", outputString);
         }
 
         private void timeElapsedTimer_Tick(object sender, EventArgs e)
         {
             secondsLeft--;
             secondsElapsed++;
-            lblTimeLeft.Content = testManager.SecondsToTimeSpanFormatter(secondsLeft);
+            lblTimeLeft.Content = _testManager.SecondsToTimeSpanFormatter(secondsLeft);
             if (secondsLeft == 0)
             {
                 EndTest();
@@ -206,7 +220,7 @@ namespace SpeedTyper
 
         private decimal GetWPM()
         {
-            return testManager.CalculateWPM(correctWords, (decimal)secondsElapsed);
+            return _testManager.CalculateWPM(correctWords, (decimal)secondsElapsed);
         }
     }
 }

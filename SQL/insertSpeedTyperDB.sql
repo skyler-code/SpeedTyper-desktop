@@ -33,6 +33,7 @@ INSERT INTO [dbo].[RankInfo]
 	([RankID], [RankName])
 	VALUES
 	-- These are the Alliance honor ranks from vanilla WoW. Sadly, I knew this without looking it up.
+	(0, "Citizen"),
 	(1, "Private"),
 	(2, "Corporal"),
 	(3, "Sergeant"),
@@ -50,6 +51,20 @@ INSERT INTO [dbo].[RankInfo]
 	(15, "The King")
 GO
 
+print '' print '*** Inserting XPModifierInfo Records'
+GO
+INSERT INTO [dbo].[XPModifierInfo]
+	([ModifierType], [RequiredValue], [ModifierValue])
+	VALUES
+	("wpm", 0.0, 1.0),
+	("wpm", 50.0, 1.5),
+	("wpm", 70.0, 2.0),
+	("wpm", 100.0, 3.0),
+	("time", 7.0, 3.0),
+	("time", 12.0, 2.0),
+	("time", 20.0, 1.5),
+	("time", 200.0, 1.0)
+GO
 
 		
 

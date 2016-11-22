@@ -82,17 +82,13 @@ AS
 	END
 GO
 
-print '' print '*** Creating sp_retrieve_rank_name'
+print '' print '*** Creating sp_retrieve_rank_names'
 GO
-CREATE PROCEDURE [dbo].[sp_retrieve_rank_name]
-	(
-	@RankID	int
-	)
+CREATE PROCEDURE [dbo].[sp_retrieve_rank_names]
 AS
 	BEGIN
-		SELECT RankName
+		SELECT RankID, RankName
 		FROM RankInfo
-		WHERE RankID = @RankID
 	END
 GO
 
@@ -165,5 +161,35 @@ AS
 		FROM TestResults
 		WHERE UserID = @UserID
 		ORDER BY DateTaken DESC
+	END
+GO
+
+print '' print '*** Creating sp_retrieve_wpm_xp_modifier'
+GO
+CREATE PROCEDURE [dbo].[sp_retrieve_wpm_xp_modifier]
+	(
+	@WPM decimal(18,2)
+	)
+AS
+	BEGIN
+		SELECT MAX(ModifierValue)
+		FROM XPModifierInfo
+		WHERE @WPM >= RequiredValue
+		AND ModifierType = "wpm"
+	END
+GO
+
+print '' print '*** Creating sp_retrieve_time_xp_modifier'
+GO
+CREATE PROCEDURE [dbo].[sp_retrieve_time_xp_modifier]
+	(
+	@SecondsElapsed decimal(18,2)
+	)
+AS
+	BEGIN
+		SELECT MAX(ModifierValue)
+		FROM XPModifierInfo
+		WHERE @SecondsElapsed <= RequiredValue
+		AND ModifierType = "time"
 	END
 GO

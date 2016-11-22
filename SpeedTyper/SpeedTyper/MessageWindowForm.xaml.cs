@@ -20,11 +20,11 @@ namespace SpeedTyper
     /// 
     public enum MessageBoxType { OK, OKCANCEL, YESNO };
 
-    internal partial class MessageBoxForm : Window
+    internal partial class MessageWindowForm : Window
     {
         
 
-        internal MessageBoxForm(string title, string message, MessageBoxType messageType)
+        internal MessageWindowForm(string title, string message, MessageBoxType messageType)
         {
             InitializeComponent();
             this.Title = title;
@@ -76,7 +76,7 @@ namespace SpeedTyper
         
         public static bool Show (Window owner, string title, string message, MessageBoxType messageType = MessageBoxType.OK)
         {
-            MessageBoxForm messageBoxForm = new MessageBoxForm(title, message, messageType);
+            MessageWindowForm messageBoxForm = new MessageWindowForm(title, message, messageType);
             messageBoxForm.Owner = owner;
             messageBoxForm.ShowDialog();
             return (bool)messageBoxForm.DialogResult;

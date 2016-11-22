@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LeaderboardManager.cs" />
+    <Compile Include="LevelManager.cs" />
     <Compile Include="RankManager.cs" />
     <Compile Include="TestManager.cs" />
     <Compile Include="UserManager.cs" />

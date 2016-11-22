@@ -65,7 +65,7 @@ namespace SpeedTyper
 
         private void btnTakeSpeedTest_Click(object sender, RoutedEventArgs e)
         {
-            TestForm testForm = new TestForm(_user);
+            TestForm testForm = new TestForm(_user, testManager);
             testForm.Top = this.Top;
             testForm.Left = this.Left;
             testForm.Show();

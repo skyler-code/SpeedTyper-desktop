@@ -1,4 +1,5 @@
 ﻿using SpeedTyperDataAccess;
+using SpeedTyperDataObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,18 +12,31 @@ namespace SpeedTyperLogicLayer
     public class RankManager
     {
         private RankIconLoader rankIconLoader = new RankIconLoader();
-        public string RetrieveUserRankName(int rankID)
-        {
-            string rankName;
 
+        private List<Rank> _ranks = null;
+
+
+        public void RetrieveUserRanks()
+        {
             try
             {
-                rankName = UserAccessor.RetrieveUserRankName(rankID);
+                _ranks = UserAccessor.RetrieveUserRankNames();
             }
             catch (Exception)
             {
                 throw;
             }
+        }
+
+        public string RetrieveUserRankName(int rankID)
+        {
+            string rankName = "";
+            if (_ranks == null)
+            {
+                RetrieveUserRanks();
+            }
+            rankName = _ranks[_ranks.FindIndex(r => r.RankID.Equals(rankID))].RankName;
+
             return rankName;
         }
 

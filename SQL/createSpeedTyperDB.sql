@@ -79,6 +79,14 @@ CREATE TABLE [dbo].[LevelInfo](
 )
 GO
 
+print '' print '*** Creating XPModifierInfo Table'
+GO
+CREATE TABLE [dbo].[XPModifierInfo](
+	[ModifierType]	[varchar](10)		NOT NULL,
+	[RequiredValue]	[decimal](18,2)		NOT NULL,
+	[ModifierValue]	[decimal](18,2)		NOT NULL
+)
+
 print '' print '*** Creating RankInfo Table'
 GO
 CREATE TABLE [dbo].[RankInfo](
