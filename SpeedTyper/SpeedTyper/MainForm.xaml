@@ -5,14 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpeedTyper"
         mc:Ignorable="d"
-        Title="SpeedTyper" Height="375" MinHeight="375" Width="475" MinWidth="475" WindowStartupLocation="CenterOwner" Loaded="Window_Loaded">
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="images.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
+        Title="SpeedTyper" Height="460" MinHeight="375" Width="515" MinWidth="475" WindowStartupLocation="CenterOwner" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -32,7 +25,7 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            
+
             <Label x:Name="lblUserLevel" Grid.Row="0" Content="Level " HorizontalAlignment="Center" Margin="0 6 0 0"/>
             <ProgressBar x:Name="prgLevelProgress" Grid.Row="1" Margin="10 7" Minimum="0" Maximum="100"/>
             <Label x:Name="lblLevelProgress" Grid.Row="1" Content="0/100" HorizontalAlignment="Center" Margin="0 6 0 0" VerticalAlignment="Center"/>
@@ -51,14 +44,29 @@
         </Grid>
         <TabControl>
             <TabItem Header="Top 10">
-                <ListView x:Name="lvwTop10" >
+                <ListView x:Name="lvwTop10" Grid.Column="1" >
                     <ListView.View>
                         <GridView AllowsColumnReorder="False">
+                            <GridViewColumn  Width="30">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Width="16" Height="16" Source="{Binding Path=RankIcon}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
                             <GridViewColumn Header="Name" Width="75" DisplayMemberBinding="{Binding DisplayName}" />
                             <GridViewColumn Header="Speed" Width="50" DisplayMemberBinding="{Binding WPM}" />
-                            <GridViewColumn Header="Time" Width="85" DisplayMemberBinding="{Binding Date}" />
+                            <GridViewColumn Header="Time" Width="78" DisplayMemberBinding="{Binding Date}" />
                         </GridView>
                     </ListView.View>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Height" Value="30" />
+                            <Setter Property="ToolTip" Value="{Binding Path=RankName}"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
                 </ListView>
             </TabItem>
             <TabItem Header="My Last 10 Scores" x:Name="tabLast10Scores">
@@ -78,12 +86,12 @@
                 <RowDefinition Height="25.5"/>
                 <RowDefinition Height="25"/>
             </Grid.RowDefinitions>
-            
+
             <Label x:Name="lblCurrentUserName" Content="Logged in as: " Grid.Row="0"/>
             <Label x:Name="lblCurrentDisplayName" Content="Display Name: " Grid.Row="1"/>
         </Grid>
-        
+
 
     </Grid>
-    
+
 </Window>

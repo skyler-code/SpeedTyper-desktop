@@ -118,7 +118,7 @@ namespace SpeedTyperDataAccess
                     testResult = new TestResult()
                     {
                         TestResultID = reader.GetInt32(0),
-                        UserID = reader.GetInt32(1),
+                        RankID = reader.GetInt32(1),
                         WPM = reader.GetDecimal(2),
                         SecondsElapsed = reader.GetInt32(3),
                         Date = reader.GetDateTime(4).ToString("MMM/dd/yyyy")
@@ -157,9 +157,10 @@ namespace SpeedTyperDataAccess
                     {
                         testResult.Add(new TestResult()
                         {
-                            DisplayName = reader.GetString(0),
-                            WPM = reader.GetDecimal(1),
-                            Date = reader.GetDateTime(2).ToString("MMM/dd/yyyy")
+                            RankID = reader.GetInt32(0),
+                            DisplayName = reader.GetString(1),
+                            WPM = reader.GetDecimal(2),
+                            Date = reader.GetDateTime(3).ToString("MM/dd/yyyy")
                         });
                     }
                 }

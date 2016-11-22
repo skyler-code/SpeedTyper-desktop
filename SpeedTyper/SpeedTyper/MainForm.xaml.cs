@@ -25,6 +25,8 @@ namespace SpeedTyper
         User _user = null;
         TestManager testManager = new TestManager();
         UserManager userManager = new UserManager();
+        RankManager rankManager = new RankManager();
+
         public MainForm(User user)
         {
             this._user = user;
@@ -72,9 +74,13 @@ namespace SpeedTyper
 
         private void LoadTop10()
         {
+            LeaderboardManager boardManager = new LeaderboardManager(testManager, rankManager);
             try
             {
-                lvwTop10.ItemsSource = testManager.GetTop10TestResults();
+                var top10Results = boardManager.RetrieveTop10Leaderboard();
+                lvwTop10.ItemsSource = top10Results;
+
+
             }
             catch
             {
@@ -136,11 +142,15 @@ namespace SpeedTyper
             {
                 fileName = "Rank" + userRank;
             }
-            imgRankIcon.BeginInit();
-            imgRankIcon.Source = (ImageSource)FindResource(fileName);
-            imgRankIcon.Stretch = Stretch.Fill;
-            imgRankIcon.ToolTip = userManager.RetrieveUserRankName(userRank);
-            imgRankIcon.EndInit();
+            try
+            {
+                imgRankIcon.Source = rankManager.RetrieveRankIcon(userRank);
+                imgRankIcon.ToolTip = rankManager.RetrieveUserRankName(userRank);
+            }
+            catch (Exception)
+            {
+                MessageWindow.Show(this, "Error:", "Unable to load rank image.");
+            }
         }
     }
 }

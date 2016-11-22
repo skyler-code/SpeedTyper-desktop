@@ -204,19 +204,6 @@ namespace SpeedTyperLogicLayer
             return userNameFound;
         }
 
-        public string RetrieveUserRankName(int rankID)
-        {
-            string rankName;
-
-            try
-            {
-                rankName = UserAccessor.RetrieveUserRankName(rankID);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            return rankName;
-        }
+        
     }
 }

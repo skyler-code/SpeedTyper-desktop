@@ -146,7 +146,7 @@ GO
 CREATE PROCEDURE [dbo].[sp_retrieve_top_10_test_scores]
 AS
 	BEGIN
-		SELECT TOP 10 Users.DisplayName, WPM, DateTaken
+		SELECT TOP 10 Users.RankID, Users.DisplayName, WPM, DateTaken
 		FROM Users, TestResults
 		WHERE Users.UserID = TestResults.UserID
 		ORDER BY WPM DESC
