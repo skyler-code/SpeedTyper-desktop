@@ -63,7 +63,7 @@ print '' print '*** Creating TestData Table'
 GO
 
 CREATE TABLE [dbo].[TestData](
-	[TestID]		[int]				NOT NULL,
+	[TestID]		[int]IDENTITY(1,1)	NOT NULL,
 	[TestDataText]	[varchar](1000)		NOT NULL,
 	[DataSource]	[varchar](500)		NOT NULL,
 	CONSTRAINT [pk_TestID] PRIMARY KEY([TestID] ASC)

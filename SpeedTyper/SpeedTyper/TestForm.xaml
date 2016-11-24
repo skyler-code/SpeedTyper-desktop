@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpeedTyper"
         mc:Ignorable="d"
-        Title="TestForm" Height="200" MinHeight="200" Width="500" MinWidth="400" WindowStartupLocation="CenterOwner" Closing="Window_Closing">
+        Icon="Resources/Rank15.png"
+        Title="Speed Typer - Take Speed Test" Height="220" MinHeight="200" Width="500" MinWidth="400" WindowStartupLocation="CenterOwner" Closing="Window_Closing" >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
+            <RowDefinition Height="15"/>
             <RowDefinition Height="35"/>
             <RowDefinition Height="35"/>
         </Grid.RowDefinitions>
@@ -35,13 +37,16 @@
             </Grid>
         </Grid>
         <Grid Grid.Row="1">
+            <Label x:Name="lblDataSource" HorizontalAlignment="Left" FontSize="10" Padding="5 0 5 0"/>
+        </Grid>
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="160"/>
             </Grid.ColumnDefinitions>
             <TextBox x:Name="txtTextEntryBox" Grid.Column="0" Margin="5 5" IsEnabled="False" TextChanged="txtTextEntryBox_TextChanged" FontSize="16"/>
         </Grid>
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>

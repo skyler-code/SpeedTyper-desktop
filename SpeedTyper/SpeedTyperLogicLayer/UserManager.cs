@@ -210,14 +210,10 @@ namespace SpeedTyperLogicLayer
             {
                 // Apply the xp earned to the user.
                 user = levelManager.addXPToUser(user, earnedXP);
-                Console.WriteLine("DEBUG: XP Added");
                 // Save the new user info to the database
-                Console.WriteLine("OLD USER Level: " + oldLevel + " CurrentXP: " + oldCurrentXP + " XPToLevel: " + oldXPToLevel);
-                Console.WriteLine("NEW USER Level: " + user.Level + " CurrentXP: " + user.CurrentXP + " XPToLevel: " + user.XPToLevel);
                 if (1 == UserAccessor.UpdateUserLevelInfo(user.UserID, oldLevel, user.Level, oldCurrentXP, user.CurrentXP, oldXPToLevel, user.XPToLevel))
                 {
                     levelsEarned = user.Level - oldLevel;
-                    Console.WriteLine("DEBUG: LEVELSEARNED: " + levelsEarned);
 
                     // Rank handling
                     if ((user.Level == Constants.MAXLEVEL))
@@ -241,10 +237,6 @@ namespace SpeedTyperLogicLayer
                     }
                     // Retrieve a fresh copy of the user from the database.
                    user = UserAccessor.RetrieveUserByID(user.UserID);
-                }
-                else
-                {
-                    Console.WriteLine("Didn't work");
                 }
             }
             catch (Exception)

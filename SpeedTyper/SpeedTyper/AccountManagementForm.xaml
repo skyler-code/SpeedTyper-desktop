@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:SpeedTyper"
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
+        Icon="Resources/Rank15.png"
         Height="300" Width="400" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>

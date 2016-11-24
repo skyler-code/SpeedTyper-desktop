@@ -149,6 +149,58 @@ AS
 	END
 GO
 
+print '' print '*** Creating sp_retrieve_all_top_test_scores'
+GO
+CREATE PROCEDURE [dbo].[sp_retrieve_all_top_test_scores]
+AS
+	BEGIN
+		SELECT TOP 100 Users.RankID, Users.DisplayName, WPM, DateTaken
+		FROM Users, TestResults
+		WHERE Users.UserID = TestResults.UserID
+		ORDER BY WPM DESC
+	END
+GO
+
+print '' print '*** Creating sp_retrieve_last_90_days_test_scores'
+GO
+CREATE PROCEDURE [dbo].[sp_retrieve_last_90_days_test_scores]
+AS
+	BEGIN
+		SELECT TOP 100 Users.RankID, Users.DisplayName, WPM, DateTaken
+		FROM Users, TestResults
+		WHERE Users.UserID = TestResults.UserID
+		AND DateTaken >= DATEADD(DAY, -90, GETDATE())
+		ORDER BY WPM DESC
+	END
+GO
+
+print '' print '*** Creating sp_retrieve_last_30_days_test_scores'
+GO
+CREATE PROCEDURE [dbo].[sp_retrieve_last_30_days_test_scores]
+AS
+	BEGIN
+		SELECT TOP 100 Users.RankID, Users.DisplayName, WPM, DateTaken
+		FROM Users, TestResults
+		WHERE Users.UserID = TestResults.UserID
+		AND DateTaken >= DATEADD(DAY, -30, GETDATE())
+		ORDER BY WPM DESC
+	END
+GO
+
+print '' print '*** Creating sp_retrieve_todays_test_scores'
+GO
+CREATE PROCEDURE [dbo].[sp_retrieve_todays_test_scores]
+AS
+	BEGIN
+		SELECT TOP 100 Users.RankID, Users.DisplayName, WPM, DateTaken
+		FROM Users, TestResults
+		WHERE Users.UserID = TestResults.UserID
+		AND DateTaken >= DATEADD(hh, -24, GETDATE())
+		ORDER BY WPM DESC
+	END
+GO
+
+
 print '' print '*** Creating sp_retrieve_user_last_10_scores'
 GO
 CREATE PROCEDURE [dbo].[sp_retrieve_user_last_10_scores]
@@ -161,6 +213,18 @@ AS
 		FROM TestResults
 		WHERE UserID = @UserID
 		ORDER BY DateTaken DESC
+	END
+GO
+
+print '' print '*** Creating sp_retrieve_highest_ranking_users'
+GO
+CREATE PROCEDURE [dbo].[sp_retrieve_highest_ranking_users]
+AS
+	BEGIN
+		SELECT TOP 100 DisplayName, RankID
+		FROM Users
+		WHERE RankID > 0
+		ORDER BY RankID DESC
 	END
 GO
 

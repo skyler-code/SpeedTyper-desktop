@@ -22,8 +22,6 @@ namespace SpeedTyper
 
     internal partial class MessageWindowForm : Window
     {
-        
-
         internal MessageWindowForm(string title, string message, MessageBoxType messageType)
         {
             InitializeComponent();

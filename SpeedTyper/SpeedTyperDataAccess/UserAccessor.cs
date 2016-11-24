@@ -347,7 +347,7 @@ namespace SpeedTyperDataAccess
             var cmd = new SqlCommand(cmdText, conn);
 
             cmd.CommandType = CommandType.StoredProcedure;
-            
+
 
             // try-catch-finally
 
@@ -409,7 +409,44 @@ namespace SpeedTyperDataAccess
                 conn.Close();
             }
             return result;
+        }
 
+        public static List<User> LoadHighestRankingMembers()
+        {
+            var highestRankingMembers = new List<User>();
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_highest_ranking_users";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        highestRankingMembers.Add(new User()
+                        {
+                            DisplayName = reader.GetString(0),
+                            RankID = reader.GetInt32(1)
+                        });
+                    }
+                }
+                reader.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return highestRankingMembers;
         }
     }
 

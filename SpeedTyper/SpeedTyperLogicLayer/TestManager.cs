@@ -89,6 +89,70 @@ namespace SpeedTyperLogicLayer
             return top10Tests;
         }
 
+        public List<TestResult> GetAllTopTestResults()
+        {
+            List<TestResult> topTests = null;
+
+            try
+            {
+                topTests = TestAccessor.RetrieveAllTopTestResults();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return topTests;
+        }
+
+        public List<TestResult> GetTop90DaysResults()
+        {
+            List<TestResult> topTests = null;
+
+            try
+            {
+                topTests = TestAccessor.RetrieveLast90DaysTestResults();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return topTests;
+        }
+
+        public List<TestResult> GetTop30DaysResults()
+        {
+            List<TestResult> topTests = null;
+
+            try
+            {
+                topTests = TestAccessor.RetrieveLast30DaysTestResults();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return topTests;
+        }
+
+        public List<TestResult> GetTodaysResults()
+        {
+            List<TestResult> topTests = null;
+
+            try
+            {
+                topTests = TestAccessor.RetrieveTodaysTestResults();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return topTests;
+        }
+
         public List<TestResult> GetUserLast10TestResults(int userID)
         {
             List<TestResult> last10Tests = null;

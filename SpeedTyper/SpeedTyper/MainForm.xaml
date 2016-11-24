@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpeedTyper"
         mc:Ignorable="d"
-        Title="SpeedTyper" Height="360" MinHeight="325" Width="515" MinWidth="475" WindowStartupLocation="CenterOwner" Loaded="Window_Loaded">
+        Title="SpeedTyper" Height="360" MinHeight="325" Width="515" MinWidth="475" WindowStartupLocation="CenterOwner" Loaded="Window_Loaded" Icon="Resources/Rank15.png">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -30,7 +30,7 @@
             <Label x:Name="lblLevelProgress" Grid.Row="1" Content="0/100" HorizontalAlignment="Center" Margin="0 6 0 0" VerticalAlignment="Center"/>
             <Image x:Name="imgRankIcon" Grid.Row="2" Width="32" Height="32" Margin="80 0"/>
             <Button x:Name="btnTakeSpeedTest" Grid.Row="3" Margin="5 5" Content="Take Speed Test" Click="btnTakeSpeedTest_Click"/>
-            <Button x:Name="btnViewLeaderboards" Grid.Row="4" Margin="5 5" Content="View Leaderboards"/>
+            <Button x:Name="btnViewLeaderboards" Grid.Row="4" Margin="5 5" Content="View Leaderboards" Click="btnViewLeaderboards_Click"/>
             <Grid Grid.Row="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>

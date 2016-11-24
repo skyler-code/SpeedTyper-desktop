@@ -178,6 +178,166 @@ namespace SpeedTyperDataAccess
             return testResult;
         }
 
+        public static List<TestResult> RetrieveAllTopTestResults()
+        {
+            var testResult = new List<TestResult>();
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_all_top_test_scores";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        testResult.Add(new TestResult()
+                        {
+                            RankID = reader.GetInt32(0),
+                            DisplayName = reader.GetString(1),
+                            WPM = reader.GetDecimal(2),
+                            Date = reader.GetDateTime(3).ToString("MM/dd/yyyy HH:mm:ss")
+                        });
+                    }
+                }
+                reader.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return testResult;
+        }
+
+        public static List<TestResult> RetrieveLast90DaysTestResults()
+        {
+            var testResult = new List<TestResult>();
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_last_90_days_test_scores";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        testResult.Add(new TestResult()
+                        {
+                            RankID = reader.GetInt32(0),
+                            DisplayName = reader.GetString(1),
+                            WPM = reader.GetDecimal(2),
+                            Date = reader.GetDateTime(3).ToString("MM/dd/yyyy HH:mm:ss")
+                        });
+                    }
+                }
+                reader.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return testResult;
+        }
+
+        public static List<TestResult> RetrieveLast30DaysTestResults()
+        {
+            var testResult = new List<TestResult>();
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_last_30_days_test_scores";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        testResult.Add(new TestResult()
+                        {
+                            RankID = reader.GetInt32(0),
+                            DisplayName = reader.GetString(1),
+                            WPM = reader.GetDecimal(2),
+                            Date = reader.GetDateTime(3).ToString("MM/dd/yyyy HH:mm:ss")
+                        });
+                    }
+                }
+                reader.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return testResult;
+        }
+
+        public static List<TestResult> RetrieveTodaysTestResults()
+        {
+            var testResult = new List<TestResult>();
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_todays_test_scores";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        testResult.Add(new TestResult()
+                        {
+                            RankID = reader.GetInt32(0),
+                            DisplayName = reader.GetString(1),
+                            WPM = reader.GetDecimal(2),
+                            Date = reader.GetDateTime(3).ToString("MM/dd/yyyy HH:mm:ss")
+                        });
+                    }
+                }
+                reader.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return testResult;
+        }
+
         public static List<TestResult> RetrieveUserLast10TestResults(int userID)
         {
             var testResult = new List<TestResult>();

@@ -1,0 +1,22 @@
+﻿<Window x:Class="SpeedTyper.ToastWindowForm"
+        x:ClassModifier="internal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SpeedTyper"
+        Icon="Resources/Rank15.png"
+        mc:Ignorable="d" Height="200" Width="275" WindowStartupLocation="CenterOwner">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <Image x:Name="imgRankIcon" Grid.Row="0" Width="32" Height="32" Margin="80 0"/>
+        <TextBlock x:Name="txtMessage" Grid.Row="1" MaxWidth="260" MaxHeight="200" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Button x:Name="btnOk" Content="Thanks!" Grid.Row="3" Margin="75 10" IsDefault="True" Click="btnOk_Click"/>
+
+    </Grid>
+</Window>

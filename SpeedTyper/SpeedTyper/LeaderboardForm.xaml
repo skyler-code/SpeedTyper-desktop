@@ -5,8 +5,141 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpeedTyper"
         mc:Ignorable="d"
-        Title="LeaderboardForm" Height="300" Width="300">
+        Title="SpeedTyper - Leaderboard" Height="300" Width="460" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner" Icon="Resources/Rank15.png">
     <Grid>
-        
+        <TabControl Grid.Column="0">
+            <TabItem Header="All Results">
+                <ListView x:Name="lvwAllResults">
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="False">
+                            <GridViewColumn Header="#" Width="30" DisplayMemberBinding="{Binding BoardRanking}" />
+                            <GridViewColumn  Width="30">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Width="16" Height="16" Source="{Binding Path=RankIcon}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Name" Width="75" DisplayMemberBinding="{Binding DisplayName}" />
+                            <GridViewColumn Header="Speed" Width="50" DisplayMemberBinding="{Binding WPM}" />
+                            <GridViewColumn Header="Time" Width="125" DisplayMemberBinding="{Binding Date}" />
+                        </GridView>
+                    </ListView.View>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Height" Value="20" />
+                            <Setter Property="ToolTip" Value="{Binding Path=RankName}"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </TabItem>
+            <TabItem Header="Last 90 Days">
+                <ListView x:Name="lvwLast90Days">
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="False">
+                            <GridViewColumn Header="#" Width="30" DisplayMemberBinding="{Binding BoardRanking}" />
+                            <GridViewColumn  Width="30">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Width="16" Height="16" Source="{Binding Path=RankIcon}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Name" Width="75" DisplayMemberBinding="{Binding DisplayName}" />
+                            <GridViewColumn Header="Speed" Width="50" DisplayMemberBinding="{Binding WPM}" />
+                            <GridViewColumn Header="Time" Width="125" DisplayMemberBinding="{Binding Date}" />
+                        </GridView>
+                    </ListView.View>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Height" Value="20" />
+                            <Setter Property="ToolTip" Value="{Binding Path=RankName}"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </TabItem>
+            <TabItem Header="Last 30 Days">
+                <ListView x:Name="lvwLast30Days">
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="False">
+                            <GridViewColumn Header="#" Width="30" DisplayMemberBinding="{Binding BoardRanking}" />
+                            <GridViewColumn  Width="30">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Width="16" Height="16" Source="{Binding Path=RankIcon}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Name" Width="75" DisplayMemberBinding="{Binding DisplayName}" />
+                            <GridViewColumn Header="Speed" Width="50" DisplayMemberBinding="{Binding WPM}" />
+                            <GridViewColumn Header="Time" Width="125" DisplayMemberBinding="{Binding Date}" />
+                        </GridView>
+                    </ListView.View>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Height" Value="20" />
+                            <Setter Property="ToolTip" Value="{Binding Path=RankName}"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </TabItem>
+            <TabItem Header="Last 24 Hours">
+                <ListView x:Name="lvwToday">
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="False">
+                            <GridViewColumn Header="#" Width="30" DisplayMemberBinding="{Binding BoardRanking}" />
+                            <GridViewColumn  Width="30">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Width="16" Height="16" Source="{Binding Path=RankIcon}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Name" Width="75" DisplayMemberBinding="{Binding DisplayName}" />
+                            <GridViewColumn Header="Speed" Width="50" DisplayMemberBinding="{Binding WPM}" />
+                            <GridViewColumn Header="Time" Width="125" DisplayMemberBinding="{Binding Date}" />
+                        </GridView>
+                    </ListView.View>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Height" Value="20" />
+                            <Setter Property="ToolTip" Value="{Binding Path=RankName}"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </TabItem>
+            <TabItem Header="Highest Ranking Users">
+                <ListView x:Name="lvwHighestRankingMembers">
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="False">
+                            <GridViewColumn  Width="30">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Width="16" Height="16" Source="{Binding Path=RankIcon}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding DisplayName}" />
+                            <GridViewColumn Header="Rank" Width="150" DisplayMemberBinding="{Binding RankName}" />
+                        </GridView>
+                    </ListView.View>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Height" Value="20" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

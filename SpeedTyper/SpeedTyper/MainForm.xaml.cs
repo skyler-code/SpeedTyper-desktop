@@ -92,7 +92,7 @@ namespace SpeedTyper
 
         private void btnTakeSpeedTest_Click(object sender, RoutedEventArgs e)
         {
-            TestForm testForm = new TestForm(_user, userManager, testManager, levelManager);
+            TestForm testForm = new TestForm(_user, userManager, testManager, levelManager, rankManager);
             testForm.Top = this.Top;
             testForm.Left = this.Left;
             testForm.Show();
@@ -101,7 +101,7 @@ namespace SpeedTyper
 
         private void LoadTop10()
         {
-            LeaderboardManager boardManager = new LeaderboardManager(testManager, rankManager);
+            LeaderboardManager boardManager = new LeaderboardManager(rankManager);
             try
             {
                 var top10Results = boardManager.RetrieveTop10Leaderboard();
@@ -161,15 +161,6 @@ namespace SpeedTyper
         private void setRankImage()
         {
             var userRank = _user.RankID;
-            string fileName;
-            if (userRank < 10)
-            {
-                fileName = "Rank0" + userRank;
-            }
-            else
-            {
-                fileName = "Rank" + userRank;
-            }
             try
             {
                 imgRankIcon.Source = rankManager.RetrieveRankIcon(userRank);
@@ -179,6 +170,13 @@ namespace SpeedTyper
             {
                 MessageWindow.Show(this, "Error:", "Unable to load rank image.");
             }
+        }
+
+        private void btnViewLeaderboards_Click(object sender, RoutedEventArgs e)
+        {
+            LeaderboardForm leaderboardForm = new LeaderboardForm(rankManager);
+            leaderboardForm.Owner = this;
+            leaderboardForm.ShowDialog();
         }
     }
 }

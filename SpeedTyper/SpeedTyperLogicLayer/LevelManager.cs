@@ -67,7 +67,6 @@ namespace SpeedTyperLogicLayer
                     {
                         // User has leveled.
                         user.Level = user.Level + 1;
-                        Console.WriteLine("User has leveled" + user.CurrentXP + user.XPToLevel);
                         user.XPToLevel = RetrieveXPForLevel(user.Level + 1);
                     }
                     else

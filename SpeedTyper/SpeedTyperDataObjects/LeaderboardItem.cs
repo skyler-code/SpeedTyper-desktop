@@ -9,6 +9,7 @@ namespace SpeedTyperDataObjects
 {
     public class LeaderboardItem
     {
+        public int BoardRanking { get; set; }
         public ImageSource RankIcon { get; set; }
         public string RankName { get; set; }
         public string DisplayName { get; set;}

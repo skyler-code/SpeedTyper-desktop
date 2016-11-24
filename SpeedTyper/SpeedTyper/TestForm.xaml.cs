@@ -42,12 +42,14 @@ namespace SpeedTyper
         UserManager _userManager;
         TestManager _testManager;
         LevelManager _levelManager;
-        public TestForm(User user, UserManager userManager, TestManager testManager, LevelManager levelManager)
+        RankManager _rankManager;
+        public TestForm(User user, UserManager userManager, TestManager testManager, LevelManager levelManager, RankManager rankManager)
         {
             _user = user;
             _testManager = testManager;
             _userManager = userManager;
             _levelManager = levelManager;
+            _rankManager = rankManager;
             InitializeComponent();
         }
 
@@ -102,7 +104,7 @@ namespace SpeedTyper
             {
                 txtTestData.Text += s;
             }
-
+            lblDataSource.Content = testData.DataSource;
             timeElapsedTimer = new DispatcherTimer();
             timeElapsedTimer.Tick += new EventHandler(timeElapsedTimer_Tick);
             timeElapsedTimer.Interval = new TimeSpan(0, 0, 1); // Ticks every 1 ms.
@@ -152,7 +154,7 @@ namespace SpeedTyper
 
         public void SubmitTest()
         {
-            TestResult testResult = _testManager.SaveTestResults(_user.UserID, testData.TestID, GetWPM(), secondsElapsed);
+            var testResult = _testManager.SaveTestResults(_user.UserID, testData.TestID, GetWPM(), secondsElapsed);
             var wpmXPModifier = _levelManager.GetWPMXPModifier(testResult.WPM);
             var timeXPModifier = _levelManager.GetTimeMXPModifier((decimal)testResult.SecondsElapsed);
 
@@ -171,17 +173,21 @@ namespace SpeedTyper
                 bool titlesEarned = appliedXPTuple.Item3;
 
                 MessageWindow.Show(this, "Congratulations!", outputString);
-                if (levelsGained > 0)
+                if (levelsGained > 0 || titlesEarned == true)
                 {
                     if (levelsGained > 1)
                     {
                         outputString = "Wow! Somehow, you managed to earn more than 1 level. Congrats!";
                     }
-                    else
+                    else if (levelsGained == 1)
                     {
-                        outputString = "You have leveled up!\nYou are now level " + _user.Level; 
+                        outputString = "You have leveled up!\nYou are now level " + _user.Level +
+                                       "\nYou have earned the rank: " + _rankManager.RetrieveUserRankName(_user.RankID);
+                    } else
+                    {
+                        outputString = "You have earned the rank: " + _rankManager.RetrieveUserRankName(_user.RankID);
                     }
-                    MessageWindow.Show(this, "Congratulations!", outputString);
+                    ToastWindow.Show(this, "Congratulations!", outputString, _user.RankID, _rankManager);
                 }
             }
             catch (Exception)
