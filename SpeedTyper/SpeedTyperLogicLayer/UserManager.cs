@@ -12,10 +12,7 @@ namespace SpeedTyperLogicLayer
 {
     public class UserManager
     {
-        // username can only contain letters, numbers, and underscores
-        private string nameRegexString = @"^\w+$";
-        // password  - Minimum 8 characters at least 1 Alphabet and 1 Number with Optional Special Chars
-        private string passwordRegexString = @"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!$%@#£€*?&]{8,}$"; // http://stackoverflow.com/a/21456918/7124631
+
 
 
 
@@ -46,11 +43,6 @@ namespace SpeedTyperLogicLayer
             {
                 throw new ApplicationException("Invalid Username");
             }
-            if (password.Length < 7) // we really need a better method
-            {                        // possibly a regex for complexity
-                throw new ApplicationException("Invalid Password");
-            }
-
 
             try
             {
@@ -83,17 +75,17 @@ namespace SpeedTyperLogicLayer
             /**
              * Creates user and then returns the user if successful
              */
-            Regex nameRegex = new Regex(nameRegexString);
-            Regex passwordRegex = new Regex(passwordRegexString);
+            Regex nameRegex = new Regex(Constants.NAMEREGEX);
+            Regex passwordRegex = new Regex(Constants.PASSWORDREGEX);
             User _user = null;
 
             if (nameRegex.Match(username).Success == false)
             {
-                throw new ApplicationException("Username can only contain letters, numbers, and underscores.");
+                throw new ApplicationException("Username must be 4-20 characters long and can only contain letters, numbers, and underscores.");
             }
             else if (nameRegex.Match(displayname).Success == false)
             {
-                throw new ApplicationException("Display Name can only contain letters, numbers, and underscores.");
+                throw new ApplicationException("Display Name must be 4-20 characters long and can only contain letters, numbers, and underscores.");
             }
             else if (passwordRegex.Match(password).Success == false)
             {
@@ -136,13 +128,13 @@ namespace SpeedTyperLogicLayer
             /**
              * Creates user and then returns the user if successful
              */
-            Regex nameRegex = new Regex(nameRegexString);
-            Regex passwordRegex = new Regex(passwordRegexString);
+            Regex nameRegex = new Regex(Constants.NAMEREGEX);
+            Regex passwordRegex = new Regex(Constants.PASSWORDREGEX);
             User _user = null;
 
             if (nameRegex.Match(newDisplayName).Success == false)
             {
-                throw new ApplicationException("Display Name can only contain letters, numbers, and underscores.");
+                throw new ApplicationException("Display Name must be 4-20 characters long and can only contain letters, numbers, and underscores.");
             }
             else if (passwordRegex.Match(newPassword).Success == false)
             {
@@ -204,6 +196,62 @@ namespace SpeedTyperLogicLayer
             return userNameFound;
         }
 
-        
+        public Tuple<User, int, bool> UserLevelingHandler(User user, int earnedXP)
+        {
+            int oldLevel = user.Level;
+            int oldCurrentXP = user.CurrentXP;
+            int oldXPToLevel = user.XPToLevel;
+            
+            LevelManager levelManager = new LevelManager();
+            RankManager rankManager = new RankManager();
+            bool titleEarned = false;
+            int levelsEarned = 0;
+            try
+            {
+                // Apply the xp earned to the user.
+                user = levelManager.addXPToUser(user, earnedXP);
+                Console.WriteLine("DEBUG: XP Added");
+                // Save the new user info to the database
+                Console.WriteLine("OLD USER Level: " + oldLevel + " CurrentXP: " + oldCurrentXP + " XPToLevel: " + oldXPToLevel);
+                Console.WriteLine("NEW USER Level: " + user.Level + " CurrentXP: " + user.CurrentXP + " XPToLevel: " + user.XPToLevel);
+                if (1 == UserAccessor.UpdateUserLevelInfo(user.UserID, oldLevel, user.Level, oldCurrentXP, user.CurrentXP, oldXPToLevel, user.XPToLevel))
+                {
+                    levelsEarned = user.Level - oldLevel;
+                    Console.WriteLine("DEBUG: LEVELSEARNED: " + levelsEarned);
+
+                    // Rank handling
+                    if ((user.Level == Constants.MAXLEVEL))
+                    {
+                        // The user is max level so we attempt to take over the throne.
+                        if (user.UserID == UserAccessor.Succession())
+                        {
+                            titleEarned = true;
+                        }
+                    }
+                    else if (levelsEarned > 0) // probably redundant
+                    {
+                        for (int i = 0; i < levelsEarned; i++)
+                        {
+                            // user gets ranked up!
+                            if (1 == UserAccessor.UserRankUp(user.UserID))
+                            {
+                                titleEarned = true;
+                            }
+                        }
+                    }
+                    // Retrieve a fresh copy of the user from the database.
+                   user = UserAccessor.RetrieveUserByID(user.UserID);
+                }
+                else
+                {
+                    Console.WriteLine("Didn't work");
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return Tuple.Create(user, levelsEarned, titleEarned);
+        }
     }
 }

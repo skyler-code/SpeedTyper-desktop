@@ -55,5 +55,52 @@ namespace SpeedTyperLogicLayer
             return xpModifier;
         }
 
+        public User addXPToUser(User user, int earnedXP)
+        {
+            user.CurrentXP = user.CurrentXP + earnedXP;
+            try
+            {
+                var processComplete = false;
+                while (processComplete == false)
+                {
+                    if ((user.CurrentXP >= user.XPToLevel) && (user.Level != Constants.MAXLEVEL))
+                    {
+                        // User has leveled.
+                        user.Level = user.Level + 1;
+                        Console.WriteLine("User has leveled" + user.CurrentXP + user.XPToLevel);
+                        user.XPToLevel = RetrieveXPForLevel(user.Level + 1);
+                    }
+                    else
+                    {
+                        processComplete = true;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return user;
+        }
+
+        public int RetrieveXPForLevel(int userLevel)
+        {
+            int xpForLevel = 0;
+
+            try
+            {
+                xpForLevel = LevelAccessor.RetrieveRequiredXPForLevel(userLevel);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return xpForLevel;
+        }
+
+
+
     }
 }

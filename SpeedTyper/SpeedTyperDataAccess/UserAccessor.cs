@@ -278,6 +278,139 @@ namespace SpeedTyperDataAccess
             return ranks;
         }
 
+        public static int UpdateUserLevelInfo(int userID, int oldLevel, int newLevel, int oldCurrentXP, int newCurrentXP, int oldXPTolevel, int newXPTolevel)
+        {
+            var result = 0;
+
+            // get a connection
+            var conn = DBConnection.GetConnection();
+
+            var cmdText = @"sp_update_user_level_info";
+
+            // create a command object
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            // add parameters
+            cmd.Parameters.Add("@UserID", SqlDbType.Int);
+            cmd.Parameters.Add("@OldLevel", SqlDbType.Int);
+            cmd.Parameters.Add("@NewLevel", SqlDbType.Int);
+            cmd.Parameters.Add("@OldCurrentXP", SqlDbType.Int);
+            cmd.Parameters.Add("@NewCurrentXP", SqlDbType.Int);
+            cmd.Parameters.Add("@OldXPTolevel", SqlDbType.Int);
+            cmd.Parameters.Add("@NewXPTolevel", SqlDbType.Int);
+
+            // set parameter values
+            cmd.Parameters["@UserID"].Value = userID;
+            cmd.Parameters["@OldLevel"].Value = oldLevel;
+            cmd.Parameters["@NewLevel"].Value = newLevel;
+            cmd.Parameters["@OldCurrentXP"].Value = oldCurrentXP;
+            cmd.Parameters["@NewCurrentXP"].Value = newCurrentXP;
+            cmd.Parameters["@OldXPTolevel"].Value = oldXPTolevel;
+            cmd.Parameters["@NewXPTolevel"].Value = newXPTolevel;
+
+            // try-catch-finally
+
+            try
+            {
+                // open a connection
+                conn.Open();
+
+                // execute and capture the result
+                result = (int)cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return result;
+        }
+
+        // This is the challenge to the throne. Since only one person can have the King title, this fires a recalibration in the database.
+        // A player that is level 15 and has the highest XP will be granted the max rank id. All other level 15 players will be demoted to (max rankid) - 1
+        // Returns the UserID of the new King
+        public static int Succession()
+        {
+            var userID = 0;
+
+            // get a connection
+            var conn = DBConnection.GetConnection();
+
+            var cmdText = @"sp_succession";
+
+            // create a command object
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            
+
+            // try-catch-finally
+
+            try
+            {
+                // open a connection
+                conn.Open();
+
+                // execute and capture the userID
+                userID = (int)cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return userID;
+        }
+
+
+        public static int UserRankUp(int userID)
+        {
+            int result = 0;
+
+            // get a connection
+            var conn = DBConnection.GetConnection();
+
+            var cmdText = @"sp_user_rank_up";
+
+            // create a command object
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            // add parameters
+            cmd.Parameters.Add("@UserID", SqlDbType.Int);
+            // set parameter values
+            cmd.Parameters["@UserID"].Value = userID;
+
+            // try-catch-finally
+
+            try
+            {
+                // open a connection
+                conn.Open();
+
+                // execute and capture the row count
+                result = (int)cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return result;
+
+        }
     }
 
 }

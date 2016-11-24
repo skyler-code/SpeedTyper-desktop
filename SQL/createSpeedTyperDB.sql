@@ -27,7 +27,7 @@ CREATE TABLE [dbo].[Users](
 	[RankID]		[int]					NOT NULL DEFAULT 0,
 	[Level]			[int]					NOT NULL DEFAULT 0,
 	[CurrentXP]		[int]					NOT NULL DEFAULT 0,
-	[XPToLevel]		[int]					NOT NULL DEFAULT 150, -- 150XP required for level 1
+	[XPToLevel]		[int]					NOT NULL DEFAULT 200, -- 200XP required for level 1
 
 	CONSTRAINT [pk_UserID] PRIMARY KEY([UserID] ASC),
 	CONSTRAINT [ak_Username] UNIQUE ([Username] ASC)

@@ -3,28 +3,54 @@ GO
 INSERT INTO [dbo].[Users]
 		([UserName], [DisplayName])
 	VALUES
-		('test', 'test')
+		('test', 'test'),
+		('test1', 'test1'),
+		('test2', 'test2'),
+		('test3', 'test3')
 GO
+
+print '' print '*** Inserting dummy tests'
+GO
+INSERT INTO [dbo].[TestResults]
+	([UserID], [TestID], [WPM], [SecondsElapsed],[DateTaken])
+	VALUES
+	(1, 1, 150.5, 24, GETDATE()),
+	(1, 1, 115.5, 24, GETDATE()),
+	(1, 1, 154.5, 24, GETDATE()),
+	(1, 1, 150.5, 24, GETDATE()),
+	(1, 1, 150.5, 24, GETDATE()),
+	(1, 1, 12.5, 24, GETDATE()),
+	(1, 1, 150.5, 24, GETDATE()),
+	(1, 1, 14.5, 24, GETDATE()),
+	(1, 1, 154.5, 24, GETDATE()),
+	(1, 1, 150.5, 24, GETDATE()),
+	(1, 1, 152.5, 24, GETDATE()),
+	(1, 1, 150.5, 24, GETDATE()),
+	(1, 1, 150.5, 24, GETDATE()),
+	(1, 1, 150.5, 24, GETDATE())
+GO
+	
 
 print '' print '*** Inserting LevelInfo Records'
 GO
 INSERT INTO [dbo].[LevelInfo]
 	([Level], [RequiredXP])
 	VALUES
-		(1, 150),
-		(2, 2000),
-		(3, 5000),
-		(4, 10000),
-		(5, 15000),
-		(6, 20000),
-		(7, 25000),
-		(8, 30000),
-		(9, 35000),
-		(10, 40000),
-		(11, 45000),
-		(12, 50000),
-		(13, 55000),
-		(14, 60000)
+		(1, 200),
+		(2, 800),
+		(3, 1800),
+		(4, 3200),
+		(5, 5000),
+		(6, 7200),
+		(7, 9800),
+		(8, 12800),
+		(9, 16200),
+		(10, 20000),
+		(11, 24200),
+		(12, 28800),
+		(13, 33800),
+		(14, 39200),
+		(15, 45000)
 GO
 
 print '' print '*** Inserting RankInfo Records'

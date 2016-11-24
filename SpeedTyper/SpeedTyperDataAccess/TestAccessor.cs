@@ -82,7 +82,7 @@ namespace SpeedTyperDataAccess
                 // open a connection
                 conn.Open();
 
-                // execute and capture the result
+                // execute and capture the testResultID
                 result = (int)cmd.ExecuteScalar();
             }
             catch (Exception)
@@ -201,7 +201,7 @@ namespace SpeedTyperDataAccess
                         {
                             WPM = reader.GetDecimal(0),
                             SecondsElapsed = reader.GetInt32(1),
-                            Date = reader.GetDateTime(2).ToString("MMM/dd/yyyy")
+                            Date = reader.GetDateTime(2).ToString("MM/dd/yyyy")
                         });
                     }
                 }

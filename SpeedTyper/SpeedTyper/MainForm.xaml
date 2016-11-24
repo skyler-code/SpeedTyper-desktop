@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpeedTyper"
         mc:Ignorable="d"
-        Title="SpeedTyper" Height="460" MinHeight="375" Width="515" MinWidth="475" WindowStartupLocation="CenterOwner" Loaded="Window_Loaded">
+        Title="SpeedTyper" Height="360" MinHeight="325" Width="515" MinWidth="475" WindowStartupLocation="CenterOwner" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -17,23 +17,21 @@
         </Grid.RowDefinitions>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition/>
+                <RowDefinition Height="40"/>
                 <RowDefinition  MaxHeight="50"/>
                 <RowDefinition Height="32"/>
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
-                <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Label x:Name="lblUserLevel" Grid.Row="0" Content="Level " HorizontalAlignment="Center" Margin="0 6 0 0"/>
+            <Label x:Name="lblUserLevel" Grid.Row="0" Content="Level " HorizontalAlignment="Center" Margin="0 6 0 0" VerticalAlignment="Bottom"/>
             <ProgressBar x:Name="prgLevelProgress" Grid.Row="1" Margin="10 7" Minimum="0" Maximum="100"/>
             <Label x:Name="lblLevelProgress" Grid.Row="1" Content="0/100" HorizontalAlignment="Center" Margin="0 6 0 0" VerticalAlignment="Center"/>
             <Image x:Name="imgRankIcon" Grid.Row="2" Width="32" Height="32" Margin="80 0"/>
             <Button x:Name="btnTakeSpeedTest" Grid.Row="3" Margin="5 5" Content="Take Speed Test" Click="btnTakeSpeedTest_Click"/>
             <Button x:Name="btnViewLeaderboards" Grid.Row="4" Margin="5 5" Content="View Leaderboards"/>
-            <Button x:Name="btnViewAchievements" Grid.Row="5" Margin="5 5" Content="View My Achievements"/>
-            <Grid Grid.Row="6">
+            <Grid Grid.Row="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -42,9 +40,9 @@
                 <Button x:Name="btnLogout" Grid.Column="1" Margin="5 5" Content="Logout" Click="btnLogout_Click"/>
             </Grid>
         </Grid>
-        <TabControl>
+        <TabControl Grid.Column="0">
             <TabItem Header="Top 10">
-                <ListView x:Name="lvwTop10" Grid.Column="1" >
+                <ListView x:Name="lvwTop10">
                     <ListView.View>
                         <GridView AllowsColumnReorder="False">
                             <GridViewColumn  Width="30">
@@ -63,7 +61,7 @@
                     </ListView.View>
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
-                            <Setter Property="Height" Value="30" />
+                            <Setter Property="Height" Value="20" />
                             <Setter Property="ToolTip" Value="{Binding Path=RankName}"/>
                         </Style>
                     </ListView.ItemContainerStyle>

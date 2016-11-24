@@ -39,13 +39,15 @@ namespace SpeedTyper
 
         private User _user;
         private TestData testData;
+        UserManager _userManager;
         TestManager _testManager;
         LevelManager _levelManager;
-        public TestForm(User user, TestManager testManager)
+        public TestForm(User user, UserManager userManager, TestManager testManager, LevelManager levelManager)
         {
             _user = user;
             _testManager = testManager;
-            _levelManager = new LevelManager();
+            _userManager = userManager;
+            _levelManager = levelManager;
             InitializeComponent();
         }
 
@@ -161,8 +163,34 @@ namespace SpeedTyper
                                 "WPM Modifier = " + wpmXPModifier + "\n" +
                                 "Time Modifier = " + timeXPModifier + "\n" +
                                 testResult.WPM + " x " + wpmXPModifier + " x " + timeXPModifier + " = " + earnedXP;
+            try
+            {
+                var appliedXPTuple = _userManager.UserLevelingHandler(_user, earnedXP);
+                _user = appliedXPTuple.Item1;
+                int levelsGained = appliedXPTuple.Item2;
+                bool titlesEarned = appliedXPTuple.Item3;
 
-            MessageWindow.Show(this, "Congratulations!", outputString);
+                MessageWindow.Show(this, "Congratulations!", outputString);
+                if (levelsGained > 0)
+                {
+                    if (levelsGained > 1)
+                    {
+                        outputString = "Wow! Somehow, you managed to earn more than 1 level. Congrats!";
+                    }
+                    else
+                    {
+                        outputString = "You have leveled up!\nYou are now level " + _user.Level; 
+                    }
+                    MessageWindow.Show(this, "Congratulations!", outputString);
+                }
+            }
+            catch (Exception)
+            {
+                MessageWindow.Show(this, "Error:", "Unable to apply experience.");
+            }
+            
+
+            
         }
 
         private void timeElapsedTimer_Tick(object sender, EventArgs e)

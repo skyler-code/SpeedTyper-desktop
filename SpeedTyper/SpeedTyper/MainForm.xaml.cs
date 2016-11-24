@@ -26,6 +26,7 @@ namespace SpeedTyper
         TestManager testManager = new TestManager();
         UserManager userManager = new UserManager();
         RankManager rankManager = new RankManager();
+        LevelManager levelManager = new LevelManager();
 
         public MainForm(User user)
         {
@@ -39,17 +40,43 @@ namespace SpeedTyper
             lblCurrentDisplayName.Content = "Display Name: " + _user.DisplayName;
             lblUserLevel.Content = "Level: " + _user.Level.ToString();
             double levelProgress = 0;
-            if (_user.XPToLevel != 0) // Can't divide by 0!
+            double currentXP = 0;
+            double xpToLevel = 0;
+            try
             {
-                levelProgress = ((double)_user.CurrentXP / (double)_user.XPToLevel) * 100;
+                if (_user.IsGuest == false)
+                {
+                    var previousLevelXPToLevel = levelManager.RetrieveXPForLevel(_user.Level);
+                    if (_user.Level > 0)
+                    {
+                        currentXP = _user.CurrentXP - previousLevelXPToLevel;
+                        if (_user.Level == Constants.MAXLEVEL)
+                        {
+                            xpToLevel = 1;
+                        }
+                        else
+                        {
+                            xpToLevel = _user.XPToLevel - previousLevelXPToLevel;
+                        }
+                    }
+                    else
+                    {
+                        currentXP = _user.CurrentXP;
+                        xpToLevel = _user.XPToLevel;
+                    }
+                    levelProgress = (currentXP / xpToLevel) * 100;
+                    prgLevelProgress.Value = levelProgress;
+                }
+                lblLevelProgress.Content = currentXP.ToString() + " / " + xpToLevel.ToString();
             }
-            prgLevelProgress.Value = levelProgress;
-            lblLevelProgress.Content = _user.CurrentXP.ToString() + " / " + _user.XPToLevel.ToString();
+            catch (Exception)
+            {
+                MessageWindow.Show(this, "Error:", "Unable to set progress bar.");
+            }
         }
 
         private void DisableFunctionsForGuest()
         {
-            btnViewAchievements.IsEnabled = false;
             btnAccountSettings.IsEnabled = false;
             tabLast10Scores.Visibility = Visibility.Collapsed;
         }
@@ -65,7 +92,7 @@ namespace SpeedTyper
 
         private void btnTakeSpeedTest_Click(object sender, RoutedEventArgs e)
         {
-            TestForm testForm = new TestForm(_user, testManager);
+            TestForm testForm = new TestForm(_user, userManager, testManager, levelManager);
             testForm.Top = this.Top;
             testForm.Left = this.Left;
             testForm.Show();
@@ -127,6 +154,7 @@ namespace SpeedTyper
             {
                 _user = accountManagementForm.ReturnUser;
                 setLabels();
+                LoadTop10();
             }
         }
 

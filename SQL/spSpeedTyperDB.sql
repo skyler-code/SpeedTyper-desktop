@@ -193,3 +193,91 @@ AS
 		AND ModifierType = "time"
 	END
 GO
+
+print '' print '*** Creating sp_retrieve_required_xp_for_level'
+GO
+CREATE PROCEDURE [dbo].[sp_retrieve_required_xp_for_level]
+	(
+	@Level int
+	)
+AS
+	BEGIN
+		SELECT RequiredXP
+		FROM LevelInfo
+		WHERE Level = @Level
+	END
+GO
+
+print '' print '*** Creating sp_update_user_level_info'
+GO
+CREATE PROCEDURE [dbo].[sp_update_user_level_info]
+	(
+	@UserID int,
+	@OldLevel int,
+	@NewLevel int,
+	@OldCurrentXP int,
+	@NewCurrentXP int,
+	@OldXPTolevel int,
+	@NewXPTolevel int
+	)
+AS
+	BEGIN
+		UPDATE Users
+		SET Level = @NewLevel,
+			CurrentXP = @NewCurrentXP,
+			XPToLevel = @NewXPTolevel
+		WHERE Level = @OldLevel
+		AND CurrentXP = @OldCurrentXP
+		AND XPToLevel = @OldXPTolevel
+		AND UserID = @UserID
+		RETURN @@ROWCOUNT
+	END
+GO
+
+print '' print '*** Creating sp_retrieve_king'
+GO
+CREATE PROCEDURE [dbo].[sp_retrieve_king]
+AS
+	BEGIN
+		SELECT UserID
+		FROM Users
+		WHERE RankID = (SELECT MAX(RankID) FROM RankInfo)
+	END
+GO
+
+print '' print '*** Creating sp_succession'
+GO
+CREATE PROCEDURE [dbo].[sp_succession]
+AS
+	BEGIN
+		UPDATE Users
+		SET RankID = (SELECT MAX(RankID) FROM RankInfo)
+		WHERE CurrentXP = (SELECT MAX(CurrentXP) From Users)
+		AND Level = (SELECT MAX(Level) FROM LevelInfo)
+		
+		UPDATE Users
+		SET RankID = (SELECT MAX(RankID)-1 FROM RankInfo)
+		WHERE CurrentXP < (SELECT MAX(CurrentXP) From Users)
+		AND Level = (SELECT MAX(Level) FROM LevelInfo)
+		
+		SELECT UserID
+		FROM Users
+		WHERE RankID = (SELECT MAX(RankID) FROM RankInfo)
+	END
+GO
+
+print '' print '*** Creating sp_user_rank_up'
+GO 
+CREATE PROCEDURE [dbo].[sp_user_rank_up]
+	(
+	@UserID int
+	)
+AS
+	BEGIN
+		UPDATE Users
+		SET RankID = RankID + 1
+		WHERE UserID = @UserID
+		AND RankID != (SELECT MAX(RankID) FROM RankInfo)
+		RETURN @@ROWCOUNT
+	END
+GO
