@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
 
         <Image x:Name="imgRankIcon" Grid.Row="0" Width="32" Height="32" Margin="80 0"/>
-        <TextBlock x:Name="txtMessage" Grid.Row="1" MaxWidth="260" MaxHeight="200" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBlock x:Name="txtMessage" Grid.Row="1" MaxWidth="260" MaxHeight="200" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
         <Button x:Name="btnOk" Content="Thanks!" Grid.Row="3" Margin="75 10" IsDefault="True" Click="btnOk_Click"/>
 
     </Grid>
