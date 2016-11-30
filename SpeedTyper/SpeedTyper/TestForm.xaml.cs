@@ -145,7 +145,7 @@ namespace SpeedTyper
                 }
             }
             var result = MessageWindow.Show(this, "Alert:", "You typed " + GetWPM() + " WPM in " + secondsElapsed + " seconds.\n" +
-                                                            "Would you like to submit your results?", MessageBoxType.YESNO);
+                                                            "Would you like to submit your results?\nNote: You must submit test to earn experience!", MessageBoxType.YESNO);
             if (result == true)
             {
                 SubmitTest();
