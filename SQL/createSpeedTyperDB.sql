@@ -23,11 +23,10 @@ CREATE TABLE [dbo].[Users](
 	[UserID] 		[int] IDENTITY (1,1)	NOT NULL,
 	[UserName]		[varchar](20)			NOT NULL,
 	[DisplayName]	[varchar](20)			NOT NULL,
-	[PasswordHash]	[varchar](100)			NOT NULL DEFAULT '9c9064c59f1ffa2e174ee754d2979be80dd30db552ec03e7e327e9b1a4bd594e',
+	[PasswordHash]	[varchar](100)			NOT NULL DEFAULT '869d25d16a2fc01b491ce2ba8b8d5b23b1040bd8307a16a3109e9670dc0c05d9', -- Newuser1 (only sample accounts will use this)
 	[RankID]		[int]					NOT NULL DEFAULT 0,
 	[Level]			[int]					NOT NULL DEFAULT 0,
 	[CurrentXP]		[int]					NOT NULL DEFAULT 0,
-	[XPToLevel]		[int]					NOT NULL DEFAULT 200, -- 200XP required for level 1
 
 	CONSTRAINT [pk_UserID] PRIMARY KEY([UserID] ASC),
 	CONSTRAINT [ak_Username] UNIQUE ([Username] ASC)
@@ -46,16 +45,6 @@ CREATE TABLE [dbo].[TestResults](
 	[DateTaken]		[datetime]			NOT NULL,
 	
 	CONSTRAINT [pk_TestResultID] PRIMARY KEY([TestResultID] ASC)
-)
-GO
-
-print '' print '*** Creating UserAchievements Table'
-GO
-
-CREATE TABLE [dbo].[UserAchievements](
-	[AchieveID]			[int]	NOT NULL,
-	[UserID]			[int]	NOT NULL,
-	[AccomplishDate]	[date]	NOT NULL,
 )
 GO
 

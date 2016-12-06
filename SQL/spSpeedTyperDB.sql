@@ -22,9 +22,10 @@ CREATE PROCEDURE [dbo].[sp_retrieve_user_by_username]
 	)
 AS
 	BEGIN
-		SELECT UserID, UserName, DisplayName, RankID, Level, CurrentXP, XPToLevel
-		FROM Users
+		SELECT UserID, UserName, DisplayName, RankID, Users.Level, CurrentXP, LevelInfo.RequiredXP
+		FROM Users, LevelInfo
 		WHERE Username = @Username
+		AND Users.Level + 1 = LevelInfo.Level
 	END
 GO
 
@@ -36,9 +37,10 @@ CREATE PROCEDURE [dbo].[sp_retrieve_user_by_id]
 	)
 AS
 	BEGIN
-		SELECT UserID, UserName, DisplayName, RankID, Level, CurrentXP, XPToLevel
-		FROM Users
+		SELECT UserID, UserName, DisplayName, RankID, Users.Level, CurrentXP, LevelInfo.RequiredXP
+		FROM Users, LevelInfo
 		WHERE UserID = @UserID
+		AND Users.Level + 1 = LevelInfo.Level
 	END
 GO
 
@@ -221,10 +223,10 @@ GO
 CREATE PROCEDURE [dbo].[sp_retrieve_highest_ranking_users]
 AS
 	BEGIN
-		SELECT TOP 100 DisplayName, RankID
+		SELECT TOP 100 DisplayName, RankID, CurrentXP
 		FROM Users
 		WHERE RankID > 0
-		ORDER BY RankID DESC
+		ORDER BY RankID DESC, CurrentXP DESC
 	END
 GO
 
@@ -280,19 +282,15 @@ CREATE PROCEDURE [dbo].[sp_update_user_level_info]
 	@OldLevel int,
 	@NewLevel int,
 	@OldCurrentXP int,
-	@NewCurrentXP int,
-	@OldXPTolevel int,
-	@NewXPTolevel int
+	@NewCurrentXP int
 	)
 AS
 	BEGIN
 		UPDATE Users
 		SET Level = @NewLevel,
-			CurrentXP = @NewCurrentXP,
-			XPToLevel = @NewXPTolevel
+			CurrentXP = @NewCurrentXP
 		WHERE Level = @OldLevel
 		AND CurrentXP = @OldCurrentXP
-		AND XPToLevel = @OldXPTolevel
 		AND UserID = @UserID
 		RETURN @@ROWCOUNT
 	END
@@ -317,12 +315,12 @@ AS
 		UPDATE Users
 		SET RankID = (SELECT MAX(RankID) FROM RankInfo)
 		WHERE CurrentXP = (SELECT MAX(CurrentXP) From Users)
-		AND Level = (SELECT MAX(Level) FROM LevelInfo)
+		AND Level = (SELECT MAX(Level)-1 FROM LevelInfo)
 		
 		UPDATE Users
 		SET RankID = (SELECT MAX(RankID)-1 FROM RankInfo)
 		WHERE CurrentXP < (SELECT MAX(CurrentXP) From Users)
-		AND Level = (SELECT MAX(Level) FROM LevelInfo)
+		AND Level = (SELECT MAX(Level)-1 FROM LevelInfo)
 		
 		SELECT UserID
 		FROM Users

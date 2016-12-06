@@ -15,5 +15,6 @@ namespace SpeedTyperDataObjects
         public string DisplayName { get; set;}
         public decimal WPM { get; set; }
         public string Date { get; set; }
+        public int CurrentXP { get; set; }
     }
 }

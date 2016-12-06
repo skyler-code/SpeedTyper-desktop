@@ -3,6 +3,7 @@ GO
 INSERT INTO [dbo].[LevelInfo]
 	([Level], [RequiredXP])
 	VALUES
+		(0, 0),
 		(1, 200),
 		(2, 800),
 		(3, 1800),
@@ -17,7 +18,8 @@ INSERT INTO [dbo].[LevelInfo]
 		(12, 28800),
 		(13, 33800),
 		(14, 39200),
-		(15, 45000)
+		(15, 45000), -- Max Level
+		(16, -1) -- For Future Use
 GO
 
 print '' print '*** Inserting RankInfo Records'
@@ -94,5 +96,4 @@ INSERT INTO [dbo].[TestData]
 		("When the light of life has gone, no change for the meter. Then the king of spivs will come, selling blood by the litre. When nothing's sacred anymore, when the demon's knocking on your door, you'll still be staring down at the floor.", "- from Swamp Thing, a song by The Chameleons"),
 		("If I'm curt with you it's because time is a factor. I think fast, I talk fast and I need you guys to act fast if you wanna get out of this. So, pretty please with sugar on top. Clean the car!", "- from Pulp Fiction, a movie directed by Quentin Tarantino"),
 		("Rhymes trap you into saying things you don't want to say. A word like 'fire' is a good example. Before you know it you're reaching for desire, or to get higher, or calling someone a liar, or putting them on a pyre, even if that wasn't what you were going to say.", "- from Lyrics: Writing Better Words for Your Songs, a book by Rikky Rooksby")
-
 GO		

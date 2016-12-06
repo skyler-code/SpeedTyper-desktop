@@ -174,7 +174,8 @@ namespace SpeedTyperLogicLayer
                     {
                         RankIcon = _rankManager.RetrieveRankIcon(user.RankID),
                         RankName = _rankManager.RetrieveUserRankName(user.RankID),
-                        DisplayName = user.DisplayName
+                        DisplayName = user.DisplayName,
+                        CurrentXP = user.CurrentXP
                     });
                 }
             }

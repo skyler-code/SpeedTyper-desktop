@@ -278,7 +278,7 @@ namespace SpeedTyperDataAccess
             return ranks;
         }
 
-        public static int UpdateUserLevelInfo(int userID, int oldLevel, int newLevel, int oldCurrentXP, int newCurrentXP, int oldXPTolevel, int newXPTolevel)
+        public static int UpdateUserLevelInfo(int userID, int oldLevel, int newLevel, int oldCurrentXP, int newCurrentXP)
         {
             var result = 0;
 
@@ -298,17 +298,12 @@ namespace SpeedTyperDataAccess
             cmd.Parameters.Add("@NewLevel", SqlDbType.Int);
             cmd.Parameters.Add("@OldCurrentXP", SqlDbType.Int);
             cmd.Parameters.Add("@NewCurrentXP", SqlDbType.Int);
-            cmd.Parameters.Add("@OldXPTolevel", SqlDbType.Int);
-            cmd.Parameters.Add("@NewXPTolevel", SqlDbType.Int);
-
             // set parameter values
             cmd.Parameters["@UserID"].Value = userID;
             cmd.Parameters["@OldLevel"].Value = oldLevel;
             cmd.Parameters["@NewLevel"].Value = newLevel;
             cmd.Parameters["@OldCurrentXP"].Value = oldCurrentXP;
             cmd.Parameters["@NewCurrentXP"].Value = newCurrentXP;
-            cmd.Parameters["@OldXPTolevel"].Value = oldXPTolevel;
-            cmd.Parameters["@NewXPTolevel"].Value = newXPTolevel;
 
             // try-catch-finally
 
@@ -431,7 +426,8 @@ namespace SpeedTyperDataAccess
                         highestRankingMembers.Add(new User()
                         {
                             DisplayName = reader.GetString(0),
-                            RankID = reader.GetInt32(1)
+                            RankID = reader.GetInt32(1),
+                            CurrentXP = reader.GetInt32(2)
                         });
                     }
                 }

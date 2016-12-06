@@ -200,7 +200,6 @@ namespace SpeedTyperLogicLayer
         {
             int oldLevel = user.Level;
             int oldCurrentXP = user.CurrentXP;
-            int oldXPToLevel = user.XPToLevel;
             
             LevelManager levelManager = new LevelManager();
             RankManager rankManager = new RankManager();
@@ -211,7 +210,7 @@ namespace SpeedTyperLogicLayer
                 // Apply the xp earned to the user.
                 user = levelManager.addXPToUser(user, earnedXP);
                 // Save the new user info to the database
-                if (1 == UserAccessor.UpdateUserLevelInfo(user.UserID, oldLevel, user.Level, oldCurrentXP, user.CurrentXP, oldXPToLevel, user.XPToLevel))
+                if (1 == UserAccessor.UpdateUserLevelInfo(user.UserID, oldLevel, user.Level, oldCurrentXP, user.CurrentXP))
                 {
                     levelsEarned = user.Level - oldLevel;
 
