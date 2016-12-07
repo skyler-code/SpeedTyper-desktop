@@ -3,6 +3,7 @@ GO
 INSERT INTO [dbo].[LevelInfo]
 	([Level], [RequiredXP])
 	VALUES
+	-- XP Formula found in Documentation/XP Formula.xlsx
 		(0, 0),
 		(1, 200),
 		(2, 800),
