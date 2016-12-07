@@ -164,7 +164,7 @@ namespace SpeedTyper
                                 "WPM = " + testResult.WPM + "\n" +
                                 "WPM Modifier = " + wpmXPModifier + "\n" +
                                 "Time Modifier = " + timeXPModifier + "\n" +
-                                testResult.WPM + " x " + wpmXPModifier + " x " + timeXPModifier + " = " + earnedXP;
+                                testResult.WPM + " x (" + wpmXPModifier + " + " + timeXPModifier + ") = " + earnedXP;
             try
             {
                 var appliedXPTuple = _userManager.UserLevelingHandler(_user, earnedXP);

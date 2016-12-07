@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpeedTyper"
         mc:Ignorable="d"
-        Title="SpeedTyper" Height="360" MinHeight="325" Width="515" MinWidth="475" WindowStartupLocation="CenterOwner" Loaded="Window_Loaded" Icon="Resources/Rank15.png">
+        Title="SpeedTyper" Height="360" MinHeight="325" Width="535" MinWidth="475" WindowStartupLocation="CenterOwner" Loaded="Window_Loaded" Icon="Resources/Rank15.png">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -54,7 +54,7 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            <GridViewColumn Header="Name" Width="75" DisplayMemberBinding="{Binding DisplayName}" />
+                            <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding DisplayName}" />
                             <GridViewColumn Header="Speed" Width="50" DisplayMemberBinding="{Binding WPM}" />
                             <GridViewColumn Header="Time" Width="78" DisplayMemberBinding="{Binding Date}" />
                         </GridView>

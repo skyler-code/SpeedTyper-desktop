@@ -1,1 +1,3 @@
-SpeedTyper is a keyboard typing race program where users can gauge how fast they type. They can choose to submit their scores to be added to a leaderboard where the user can see how they stack up to others. Users will also earn experience points (XP) which will go towards a leveling system. Users can earn achievements and titles for leveling and their WPM feats. Users don't have to register to take a typing test or see the leaderboards, but they will if they want to submit scores or earn XP and achievements.
+Future ideas:
+Get rid of level and required xp from Users table. We can just determine a users level by how much xp they have.
+

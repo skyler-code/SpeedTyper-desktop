@@ -19,12 +19,14 @@ INSERT INTO [dbo].[Users]
 	("dunitemugs","dunitemugs", 2, 2, 1500),
 	("criticizedigress","criticizedigress", 1, 1, 500),
 	("nadrideffect","nadrideffect", 10, 10, 23500),
-	("winterfatuous","winterfatuous", 0, 0, 100),
+	("winterfatuous","winterfatuous", 9, 9, 17500),
 	("yeasttimely","yeasttimely", 10, 10, 23000),
 	("leachrail","leachrail", 7, 7, 12000),
 	("twittercopernicus","twittercopernicus", 6, 6, 9750),
 	("calddefended","calddefended", 14, 14, 40000),
-	("meerkatleaves","meerkatleaves", 11, 11, 28000)
+	("meerkatleaves","meerkatleaves", 11, 11, 28000),
+	("earcell","earcell", 0, 0, 0),
+	("bruester","brues", 0, 0, 50)
 GO
 
 

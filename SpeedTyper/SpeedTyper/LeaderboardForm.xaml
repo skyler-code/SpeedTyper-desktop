@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpeedTyper"
         mc:Ignorable="d"
-        Title="SpeedTyper - Leaderboard" Height="300" Width="460" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner" Icon="Resources/Rank15.png">
+        Title="SpeedTyper - Leaderboard" Height="315" Width="480" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner" Icon="Resources/Rank15.png">
     <Grid>
         <TabControl Grid.Column="0">
             <TabItem Header="All Results">
@@ -22,7 +22,7 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            <GridViewColumn Header="Name" Width="75" DisplayMemberBinding="{Binding DisplayName}" />
+                            <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding DisplayName}" />
                             <GridViewColumn Header="Speed" Width="50" DisplayMemberBinding="{Binding WPM}" />
                             <GridViewColumn Header="Time" Width="125" DisplayMemberBinding="{Binding Date}" />
                         </GridView>
@@ -49,7 +49,7 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            <GridViewColumn Header="Name" Width="75" DisplayMemberBinding="{Binding DisplayName}" />
+                            <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding DisplayName}" />
                             <GridViewColumn Header="Speed" Width="50" DisplayMemberBinding="{Binding WPM}" />
                             <GridViewColumn Header="Time" Width="125" DisplayMemberBinding="{Binding Date}" />
                         </GridView>
@@ -76,7 +76,7 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            <GridViewColumn Header="Name" Width="75" DisplayMemberBinding="{Binding DisplayName}" />
+                            <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding DisplayName}" />
                             <GridViewColumn Header="Speed" Width="50" DisplayMemberBinding="{Binding WPM}" />
                             <GridViewColumn Header="Time" Width="125" DisplayMemberBinding="{Binding Date}" />
                         </GridView>
@@ -103,7 +103,7 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            <GridViewColumn Header="Name" Width="75" DisplayMemberBinding="{Binding DisplayName}" />
+                            <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding DisplayName}" />
                             <GridViewColumn Header="Speed" Width="50" DisplayMemberBinding="{Binding WPM}" />
                             <GridViewColumn Header="Time" Width="125" DisplayMemberBinding="{Binding Date}" />
                         </GridView>
