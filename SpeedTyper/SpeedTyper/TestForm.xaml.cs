@@ -165,14 +165,14 @@ namespace SpeedTyper
                                 "WPM Modifier = " + wpmXPModifier + "\n" +
                                 "Time Modifier = " + timeXPModifier + "\n" +
                                 testResult.WPM + " x (" + wpmXPModifier + " + " + timeXPModifier + ") = " + earnedXP;
+            MessageWindow.Show(this, "Congratulations!", outputString);
             try
             {
                 var appliedXPTuple = _userManager.UserLevelingHandler(_user, earnedXP);
                 _user = appliedXPTuple.Item1;
                 int levelsGained = appliedXPTuple.Item2;
                 bool titlesEarned = appliedXPTuple.Item3;
-
-                MessageWindow.Show(this, "Congratulations!", outputString);
+                
                 if (levelsGained > 0 || titlesEarned == true)
                 {
                     if (levelsGained > 1)

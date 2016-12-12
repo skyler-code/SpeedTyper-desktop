@@ -23,7 +23,7 @@ CREATE TABLE [dbo].[Users](
 	[UserID] 		[int] IDENTITY (1,1)	NOT NULL,
 	[UserName]		[varchar](20)			NOT NULL,
 	[DisplayName]	[varchar](20)			NOT NULL,
-	[PasswordHash]	[varchar](100)			NOT NULL DEFAULT '869d25d16a2fc01b491ce2ba8b8d5b23b1040bd8307a16a3109e9670dc0c05d9', -- Newuser1 (only sample accounts will use this)
+	[PasswordHash]	[varchar](100)			NOT NULL DEFAULT 'f153683d3b1aafadd5ecb6bfb96fa0d6557dddc87529d1db5e2057da173d07a4', -- testuser1 (only sample accounts will use this)
 	[RankID]		[int]					NOT NULL DEFAULT 0,
 	[Level]			[int]					NOT NULL DEFAULT 0,
 	[CurrentXP]		[int]					NOT NULL DEFAULT 0,
