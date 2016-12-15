@@ -1,21 +1,14 @@
 ﻿using SpeedTyperDataObjects;
 using SpeedTyperDataAccess;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 
 namespace SpeedTyperLogicLayer
 {
     public class UserManager
     {
-
-
-
-
         internal string HashSHA256(string source)
         {
             var result = "";
@@ -68,7 +61,6 @@ namespace SpeedTyperLogicLayer
             }
             return user;
         }
-
 
         public User CreateUser(string username, string displayname, string password)
         {
@@ -200,7 +192,7 @@ namespace SpeedTyperLogicLayer
         {
             int oldLevel = user.Level;
             int oldCurrentXP = user.CurrentXP;
-            
+
             LevelManager levelManager = new LevelManager();
             RankManager rankManager = new RankManager();
             bool titleEarned = false;
@@ -235,7 +227,7 @@ namespace SpeedTyperLogicLayer
                         }
                     }
                     // Retrieve a fresh copy of the user from the database.
-                   user = UserAccessor.RetrieveUserByID(user.UserID);
+                    user = UserAccessor.RetrieveUserByID(user.UserID);
                 }
             }
             catch (Exception)

@@ -3,17 +3,10 @@ using SpeedTyperLogicLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace SpeedTyper
@@ -172,7 +165,7 @@ namespace SpeedTyper
                 _user = appliedXPTuple.Item1;
                 int levelsGained = appliedXPTuple.Item2;
                 bool titlesEarned = appliedXPTuple.Item3;
-                
+
                 if (levelsGained > 0 || titlesEarned == true)
                 {
                     if (levelsGained > 1)
@@ -183,7 +176,8 @@ namespace SpeedTyper
                     {
                         outputString = "You have leveled up!\nYou are now level " + _user.Level +
                                        "\nYou have earned the rank: " + _rankManager.RetrieveUserRankName(_user.RankID);
-                    } else
+                    }
+                    else
                     {
                         outputString = "You have earned the rank: " + _rankManager.RetrieveUserRankName(_user.RankID);
                     }
@@ -194,9 +188,9 @@ namespace SpeedTyper
             {
                 MessageWindow.Show(this, "Error:", "Unable to apply experience.");
             }
-            
 
-            
+
+
         }
 
         private void timeElapsedTimer_Tick(object sender, EventArgs e)

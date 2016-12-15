@@ -1,20 +1,7 @@
 ﻿using SpeedTyperDataObjects;
 using SpeedTyperLogicLayer;
 using System;
-using System.Data;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SpeedTyper
 {
@@ -33,7 +20,7 @@ namespace SpeedTyper
         {
             var username = txtUsername.Text;
             var password = txtPassword.Password;
-            
+
             User user;
 
             if (username.Equals(""))
@@ -63,7 +50,7 @@ namespace SpeedTyper
                 Properties.Settings.Default.Save();
                 OpenMainForm(user);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 MessageWindow.Show(this, "Error:", ex.Message);
             }

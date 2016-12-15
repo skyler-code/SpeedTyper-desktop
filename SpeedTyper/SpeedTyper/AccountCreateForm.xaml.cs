@@ -1,18 +1,7 @@
 ﻿using SpeedTyperDataObjects;
 using SpeedTyperLogicLayer;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace SpeedTyper
 {
@@ -35,17 +24,17 @@ namespace SpeedTyper
             var confirmPassword = txtConfirmPassword.Password;
             var usrMgr = new UserManager();
 
-            if(username.Equals(""))
+            if (username.Equals(""))
             {
                 MessageWindow.Show(this, "Error:", "You must enter a user name!");
                 return;
             }
-            if(displayname.Equals(""))
+            if (displayname.Equals(""))
             {
                 MessageWindow.Show(this, "Error:", "You must enter a display name!");
                 return;
             }
-            if(password.Equals("") || confirmPassword.Equals(""))
+            if (password.Equals("") || confirmPassword.Equals(""))
             {
                 MessageWindow.Show(this, "Error:", "You must enter a password!");
                 return;
@@ -60,13 +49,12 @@ namespace SpeedTyper
                 ReturnUser = usrMgr.CreateUser(username, displayname, password);
                 MessageWindow.Show(this, "Success:", "Account successfully created!");
                 this.DialogResult = true;
-                
             }
             catch (Exception ex)
             {
                 MessageWindow.Show(this, "Account creation failed:", ex.Message);
             }
-            
+
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)

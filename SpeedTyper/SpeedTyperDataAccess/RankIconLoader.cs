@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 
@@ -11,13 +7,15 @@ namespace SpeedTyperDataAccess
     public class RankIconLoader
     {
 
+        private string imageResxURI = @"/SpeedTyper;component/Resources/images.xaml";
+
         private ResourceDictionary _resDictionary;
 
         public RankIconLoader()
         {
             _resDictionary = new ResourceDictionary();
             _resDictionary.Source =
-                new Uri("/SpeedTyper;component/Resources/images.xaml",
+                new Uri(imageResxURI,
                     UriKind.RelativeOrAbsolute);
         }
 
