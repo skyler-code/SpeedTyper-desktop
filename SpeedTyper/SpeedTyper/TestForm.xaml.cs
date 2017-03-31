@@ -89,6 +89,15 @@ namespace SpeedTyper
                 return;
             }
 
+            if(testData.TestDataText != null)
+            {
+                lstTestDataText = Regex.Split(testData.TestDataText, @"(?<=[ ])").ToList();
+            } else
+            {
+                MessageWindow.Show(this, "Error:", "Can't load Test Data!");
+                return;
+            }
+
             lstTestDataText = Regex.Split(testData.TestDataText, @"(?<=[ ])").ToList();
             correctWords = new List<String>();
 
