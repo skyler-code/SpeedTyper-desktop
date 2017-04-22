@@ -158,7 +158,7 @@ namespace SpeedTyper
         {
             var testResult = _testManager.SaveTestResults(_user.UserID, testData.TestID, GetWPM(), secondsElapsed);
             var wpmXPModifier = _levelManager.GetWPMXPModifier(testResult.WPM);
-            var timeXPModifier = _levelManager.GetTimeMXPModifier((decimal)testResult.SecondsElapsed);
+            var timeXPModifier = _levelManager.GetTimeXPModifier((decimal)testResult.SecondsElapsed);
 
             var earnedXP = _levelManager.CalculateXP(testResult.WPM, wpmXPModifier, timeXPModifier);
 

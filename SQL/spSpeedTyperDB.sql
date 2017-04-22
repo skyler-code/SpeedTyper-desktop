@@ -106,6 +106,20 @@ AS
 	END
 GO
 
+print '' print '*** Creating sp_retrieve_testdata_by_id'
+GO
+CREATE PROCEDURE [dbo].[sp_retrieve_testdata_by_id]
+	(
+	@TestID int
+	)
+AS
+	BEGIN
+		SELECT TestID, TestDataText, DataSource
+		FROM TestData
+		WHERE TestID = @TestID
+	END
+GO
+
 print '' print '*** Creating sp_insert_test_result'
 GO
 CREATE PROCEDURE [dbo].[sp_insert_test_result]

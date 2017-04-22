@@ -37,7 +37,7 @@ namespace SpeedTyperLogicLayer
             return xpModifier;
         }
 
-        public decimal GetTimeMXPModifier(decimal secondsElapsed)
+        public decimal GetTimeXPModifier(decimal secondsElapsed)
         {
             decimal xpModifier = 1.0M;
             try
